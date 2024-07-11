@@ -961,12 +961,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		T.setDir(dir)
 	return T
 
-/turf/proc/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
-	underlay_appearance.icon = icon
-	underlay_appearance.icon_state = icon_state
-	underlay_appearance.dir = adjacency_dir
-	return TRUE
-
 /turf/proc/on_atom_created(atom/created_atom)
 	return
 

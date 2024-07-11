@@ -31,8 +31,6 @@ var/rollovercheck_last_timeofday = 0
 
 //returns time diff of two times normalized to time_rate_multiplier
 /proc/daytimeDiff(timeA, timeB)
-
-	//if the time is less than station time, add 24 hours (MIDNIGHT_ROLLOVER)
 	var/time_diff = timeA > timeB ? (timeB + 1) - timeA : timeB - timeA
 	return time_diff
 

@@ -6,6 +6,9 @@
 #define GLE_TAGE_FIVE		5
 #define GLE_STAGE_SIX		6
 
+/turf
+	var/obj/structure/snow/snow
+
 //SPECIAL EVENTS
 /datum/weather_event
 	var/name = ""
@@ -161,6 +164,7 @@
 	layer = BELOW_TABLE_LAYER
 	var/bleed_layer = 0
 	var/pts = 0
+	var/turf/snowed_turf
 	var/list/snows_connections = list(list("0", "0", "0", "0"), list("0", "0", "0", "0"), list("0", "0", "0", "0"))
 	var/list/diged = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
 
@@ -184,13 +188,15 @@
 
 /obj/structure/snow/Destroy(force)
 	STOP_PROCESSING(SSslowobj, src)
+	snowed_turf.snow = null
+	snowed_turf = null
 
 	. = ..()
 
 /obj/structure/snow/process(delta_time)
-	if(!weather_conditions.running_weather)
+	if(!SSweather_conditions.running_weather)
 		damage_act(3 * delta_time)
-	else if(!istype(weather_conditions.running_weather, /datum/weather_effect/snow))
+	else if(!istype(SSweather_conditions.running_weather, /datum/weather_effect/snow))
 		damage_act(6 * delta_time)
 	update_overlays()
 
@@ -199,10 +205,13 @@
 	var/turf/turf = get_turf(src)
 	if(!turf)
 		return
+	else if(turf != snowed_turf)
+		snowed_turf.snow = null
+		snowed_turf = turf
+		snowed_turf.snow = src
 
-	turf.snow = src
-	if(turf.weeds)
-		turf.weeds.Destroy()
+	if(snowed_turf.weeds)
+		snowed_turf.weeds.Destroy()
 
 	for(var/obj/structure/snow/bordered_snow in orange(src, 1))
 		if(!bordered_snow)
@@ -225,8 +234,8 @@
 	for(var/deep = 1 to length(snow_dirs))
 		snows_connections[deep] = dirs_to_corner_states(snow_dirs[deep])
 
-/obj/structure/snow/update_overlays()
-	. = ..()
+/obj/structure/snow/proc/update_overlays()
+//	. = ..()
 	if(overlays)
 		overlays.Cut()
 
@@ -252,10 +261,10 @@
 		changing_layer(min(bleed_layer - round(damage / bleed_layer * 8, 1), MAX_LAYER_SNOW_LEVELS))
 		pts = 0
 
-/obj/structure/snow/get_projectile_hit_boolean(obj/item/projectile/proj)
+/obj/structure/snow/get_projectile_hit_boolean(obj/projectile/proj)
 	return FALSE
 
-/obj/structure/snow/bullet_act(obj/item/projectile/proj)
+/obj/structure/snow/bullet_act(obj/projectile/proj)
 	return FALSE
 
 /obj/structure/snow/flamer_fire_act(damage)
@@ -301,8 +310,6 @@
 	update_overlays()
 
 	if(!bleed_layer)
-		var/turf/turf = get_turf(src)
-		turf.snow = null
 		qdel(src)
 
 /obj/structure/snow/ex_act(severity)
@@ -379,7 +386,6 @@
 	var/max_severity = 100
 	var/max_severity_change = 20
 	var/severity_steps = 5
-	var/immunity_type = TRAIT_WEATHER_IMMUNE
 	var/probability = 0
 
 	var/target_trait = PARTICLEWEATHER_RAIN
@@ -493,15 +499,6 @@
 	return FALSE
 
 /datum/particle_weather/proc/can_weather_effect(mob/living/mob_to_check)
-
-	//If mob is not in a turf
-	var/turf/mob_turf = get_turf(mob_to_check)
-	var/atom/loc_to_check = mob_to_check.loc
-	while(loc_to_check != mob_turf)
-		if((immunity_type && HAS_TRAIT(loc_to_check, immunity_type)) || HAS_TRAIT(loc_to_check, TRAIT_WEATHER_IMMUNE))
-			return
-		loc_to_check = loc_to_check.loc
-
 	return TRUE
 
 /datum/particle_weather/proc/process_mob_effect(mob/living/L, delta_time)
@@ -592,7 +589,7 @@
 				if(!affected_xeno.stat && affected_xeno.client && (affected_xeno.z in affected_zlevels))
 					playsound_client(affected_xeno.client, 'sound/voice/alien_distantroar_3.ogg', affected_xeno.loc, 25, FALSE)
 					affected_xeno.play_screen_text("<span class='langchat' style=font-size:16pt;text-align:center valign='top'><u>The Hivemind Senses:</u></span><br>" + message["xenomorph"], /atom/movable/screen/text/screen_text/command_order, rgb(175, 0, 175))
-    return FALSE
+	return FALSE
 
 /datum/looping_sound/dust_storm
 	mid_sounds = 'sound/weather/dust/weather_dust.ogg'

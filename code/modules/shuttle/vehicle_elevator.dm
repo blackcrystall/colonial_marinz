@@ -14,8 +14,6 @@
 	ambience_idle = null
 	ambience_flight = null
 
-	custom_ceiling = /turf/open/floor/roof/ship_hull/lab
-
 	var/list/railings = list()
 	var/list/gears = list()
 
