@@ -1368,7 +1368,7 @@ var/datum/controller/supply/supply_controller = new()
 	else
 		if(is_mainship_level(SSshuttle.vehicle_elevator.z))
 			dat += "Raised<br>"
-			dat += "<a href='?src=\ref[src];lower_platform=TRUE'>Lower platform</a><br>"
+			dat += "<a href='?src=\ref[src];lower_platform=1'>Lower platform</a><br>"
 		else
 			dat += "Lowered"
 			dat += "<br><hr>"
@@ -1392,10 +1392,7 @@ var/datum/controller/supply/supply_controller = new()
 	. = ..()
 	if(.)
 		return
-	if(!is_mainship_level(z))
-		return
-	if(spent)
-		return
+
 	if(!supply_controller)
 		world.log << "## ERROR: Eek. The supply_controller controller datum is missing somehow."
 		return

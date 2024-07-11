@@ -1,4 +1,4 @@
-SUBSYSTEM_DEF(particle_weather)
+SUBSYSTEM_DEF(weather_conditions)
 	name = "Particle Weather"
 	flags = SS_BACKGROUND
 	wait = 10 SECONDS
@@ -11,12 +11,12 @@ SUBSYSTEM_DEF(particle_weather)
 	var/list/weathered_turfs = list()
 	var/list/turfs_to_process = list()
 
-
 	var/particles/weather/particle_effect
 	var/datum/weather_effect/weather_special_effect
 	var/obj/weather_effect
 
 /datum/controller/subsystem/particle_weather/stat_entry(msg)
+	for()
 	if(running_weather?.running)
 		var/time_left = COOLDOWN_SECONDSLEFT(running_weather, time_left)
 		if(running_weather?.display_name)

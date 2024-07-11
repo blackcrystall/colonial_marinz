@@ -108,18 +108,29 @@
 	anonymous = TRUE
 
 /datum/world_topic/status/Run(list/input)
-	data = get_status_message()
-	statuscode = 200
-	response = "Status retrieved"
-
-
-/datum/world_topic/status/authed
-	key = "status_authed"
-	anonymous = FALSE
-
-/datum/world_topic/status/authed/Run(list/input)
+	. = ..()
 	data = list()
 	data["round_name"] = "Loading..."
+
+	data["round_id"] = "Loading..."
+	if(SSperf_logging.round?.id)
+		data["round_id"] = SSperf_logging.round.id
+
+	data["map_name"] = "Loading..."
+	if(SSmapping.configs?[GROUND_MAP])
+		data["map_name"] = SSmapping.configs[GROUND_MAP].map_name
+	if(SSmapping.next_map_configs?[GROUND_MAP])
+		data["next_map_name"] = SSmapping.next_map_configs[GROUND_MAP].map_name
+
+	data["ship_map_name"] = "Loading..."
+	if(SSmapping.configs?[SHIP_MAP])
+		data["ship_map_name"] = SSmapping.configs[SHIP_MAP].map_name
+	if(SSmapping.next_map_configs?[SHIP_MAP])
+		data["next_ship_map_name"] = SSmapping.next_map_configs[SHIP_MAP].map_name
+
+	data["players"] = length(GLOB.clients)
+	data["players_avg"] = round(SSstats_collector.get_avg_players(), 0.01)
+
 	data["mode"] = "Loading..."
 	if(SSticker.mode)
 		if(SSticker.mode.round_statistics?.round_name)
@@ -127,19 +138,6 @@
 		if(SSticker.mode.round_finished)
 			data["round_end_state"] = SSticker.mode.end_round_message()
 		data["mode"] = SSticker.mode.name
-
-	data["map"] = "Loading..."
-	if(SSmapping.configs?[GROUND_MAP])
-		data["map"] = SSmapping.configs[GROUND_MAP].map_name
-	if(SSmapping.next_map_configs?[GROUND_MAP])
-		data["map_next"] = SSmapping.next_map_configs[GROUND_MAP].map_name
-
-	data["round_id"] = "Loading..."
-	if(SSperf_logging.round?.id)
-		data["round_id"] = SSperf_logging.round.id
-
-	data["players"] = length(GLOB.clients)
-	data["players_avg"] = round(SSstats_collector.get_avg_players(), 0.01)
 
 	data["revision"] = GLOB.revdata.commit
 	data["revision_date"] = GLOB.revdata.date
@@ -150,7 +148,8 @@
 	data["admins"] = length(presentmins) + length(afkmins) //equivalent to the info gotten from adminwho
 	data["gamestate"] = SSticker.current_state
 
-	data["round_duration"] = duration2text()
+	data["round_duration"] = ROUND_TIME
+	data["zone_time"] = SSsunlighting.game_time_offseted() - GLOB.timezoneOffset
 	// Amount of world's ticks in seconds, useful for calculating round duration
 
 	//Time dilation stats.
@@ -162,13 +161,8 @@
 	data["mcpu"] = world.map_cpu
 	data["cpu"] = world.cpu
 
-	data["active_players"] = get_active_player_count()
-	if(SSticker.HasRoundStarted())
-		data["real_mode"] = SSticker.mode.name
-
 	statuscode = 200
 	response = "Status retrieved"
-
 
 /datum/world_topic/lookup_discord_id
 	key = "lookup_discord_id"

@@ -101,7 +101,7 @@
 	SIGNAL_HANDLER
 
 	var/turf/turf = get_turf(affected_atom)
-	if(SSparticle_weather.running_weather && turf.turf_flags & TURF_WEATHER)
-		duration = duration - (duration * (SSparticle_weather.running_weather.fire_smothering_strength * 0.1))
-		damage_in_total_human = damage_in_total_human - (damage_in_total_human * (SSparticle_weather.running_weather.fire_smothering_strength * 0.1))
-		damage_in_total_obj = damage_in_total_obj - (damage_in_total_obj * (SSparticle_weather.running_weather.fire_smothering_strength * 0.1))
+	if(SSweather_conditions.running_weather && turf.turf_flags & TURF_WEATHER)
+		duration = duration - (duration * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))
+		damage_in_total_human = damage_in_total_human - (damage_in_total_human * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))
+		damage_in_total_obj = damage_in_total_obj - (damage_in_total_obj * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))

@@ -112,11 +112,30 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/weather_type = input("Choose a weather", "Weather")  as null|anything in sort_list(subtypesof(/datum/particle_weather), GLOBAL_PROC_REF(cmp_typepaths_asc))
+	if(SSweather_conditions.running_weather)
+		if(tgui_alert(src, "A weather event is already in progress! End it?", "Confirm", list("End", "Continue"), 10 SECONDS) == "End")
+			if(SSweather_conditions.running_weather)
+				SSweather_conditions.running_weather.end()
+			return
+
+	if(SSweather_conditions.next_hit)
+		switch(tgui_alert(src, "A next weather event is already in delay! What to do?", "Confirm", list("Start", "Change", "Cancel"), 10 SECONDS))
+			if(action == "Cancel")
+				return
+			if(action == "Start")
+				if(SSweather_conditions.next_hit)
+					SSweather_conditions.run_weather(next_hit, TRUE)
+				return
+
+	var/weather_type = tgui_input_list(src, "Select a weather event to start", "Weather Selector", sort_list(subtypesof(/datum/particle_weather), GLOBAL_PROC_REF(cmp_typepaths_asc)))
 	if(!weather_type)
 		return
 
-	SSparticle_weather.run_weather(new weather_type(), TRUE)
+	if(tgui_alert(src, "A weather event is already in progress! End it?", "Confirm", list("Instant", "Delayed"), 10 SECONDS) == "Delayed")
+		SSweather_conditions.next_hit = new weather_type()
+		COOLDOWN_START(src, next_weather_start, rand(-3000, 3000) + initial(next_hit.weather_duration_upper) / 5)
+	else
+		SSweather_conditions.run_weather(new weather_type(), TRUE)
 
 	message_admins("[key_name_admin(usr)] started weather of type [weather_type]. What a cunt.")
 	log_admin("[key_name(usr)] started weather of type [weather_type]. What a cunt.")

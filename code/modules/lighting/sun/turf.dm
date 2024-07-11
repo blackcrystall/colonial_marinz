@@ -174,10 +174,10 @@ Sunlight System
 	if(outdoor_effect)
 		outdoor_effect.state = tempstate
 		turf_flags &= ~TURF_WEATHER
-		LAZYREMOVE(SSparticle_weather.weathered_turfs, src)
+		SSweather_conditions.weathered_turfs -= src
 		if(ceiling_status & WEATHERVISIBLE)
 			turf_flags |= TURF_WEATHER
-			LAZYADD(SSparticle_weather.weathered_turfs, src)
+			SSweather_conditions.weathered_turfs |= src
 
 /* runs up the Z stack for this turf, returns a assoc (SKYVISIBLE, WEATHERPROOF)*/
 /* pass recursionStarted=TRUE when we are checking our ceiling's stats */

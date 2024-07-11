@@ -13,7 +13,7 @@
 	..()
 
 	handle_fire() //Check if we're on fire
-	if(SSparticle_weather.running_weather)
+	if(SSweather_conditions.running_weather)
 		handle_weather(delta_time)
 
 	if(stat != CONSCIOUS)

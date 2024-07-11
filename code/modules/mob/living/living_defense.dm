@@ -218,8 +218,8 @@
 
 /mob/living/proc/handle_weather(delta_time = 1)
 	var/turf/turf = get_turf(src)
-	if(!SSparticle_weather.running_weather || !(turf.turf_flags & TURF_WEATHER))
+	if(!SSweather_conditions.running_weather || !(turf.turf_flags & TURF_WEATHER))
 		current_weather_effect_type = null
 	else
-		current_weather_effect_type = SSparticle_weather.running_weather
-	SSparticle_weather.running_weather.process_mob_effect(src, delta_time)
+		current_weather_effect_type = SSweather_conditions.running_weather
+	SSweather_conditions.running_weather.process_mob_effect(src, delta_time)

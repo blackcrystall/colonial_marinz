@@ -747,8 +747,8 @@ GLOBAL_LIST_EMPTY(flamer_particles)
 	var/turf/turf = get_turf(src)
 	if(!turf)
 		return
-	if(SSparticle_weather.running_weather && turf.turf_flags & TURF_WEATHER)
-		weather_smothering_strength = SSparticle_weather.running_weather.fire_smothering_strength
+	if(SSweather_conditions.running_weather && turf.turf_flags & TURF_WEATHER)
+		weather_smothering_strength = SSweather_conditions.running_weather.fire_smothering_strength
 	else
 		weather_smothering_strength = 0
 
