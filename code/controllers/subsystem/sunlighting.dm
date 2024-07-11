@@ -94,8 +94,6 @@ SUBSYSTEM_DEF(sunlighting)
 
 	var/list/datum/time_of_day/steps = list()
 
-	var/allow_updates = TRUE
-	var/next_day = FALSE
 	var/current_color = ""
 	var/weather_blend_ammount = 0.3
 
