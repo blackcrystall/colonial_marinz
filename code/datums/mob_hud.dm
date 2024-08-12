@@ -187,7 +187,7 @@ var/list/datum/mob_hud/huds = list(
 	var/faction_to_check = FACTION_MARINE
 
 /datum/mob_hud/faction/add_to_single_hud(mob/user, mob/target)
-	if(target.faction == GLOB.faction_datum[faction_to_check] || isobserver(user) || isyautja(user))
+	if(target.faction == GLOB.faction_datums[faction_to_check] || isobserver(user) || isyautja(user))
 		..()
 
 /datum/mob_hud/faction/upp
@@ -572,7 +572,7 @@ var/list/datum/mob_hud/huds = list(
 	if(age)
 		var/image/J = image('icons/mob/hud/hud.dmi',src, "hudxenoupgrade[age]")
 		holder.overlays += J
-	if(faction && faction != GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+	if(faction && faction != GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 		var/image/J = image('icons/mob/hud/hud.dmi', src, "hudalien_xeno")
 		J.color = faction.color
 		holder.overlays += J

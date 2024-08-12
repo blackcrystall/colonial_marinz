@@ -3,10 +3,10 @@
 	hunter_data = new /datum/huntdata
 	hunter_data.name = "[src.real_name]'s Hunter Data"
 	hunter_data.owner = src
-	if(faction?.organ_faction_iff_tag_type)
-		organ_faction_tag = new faction.organ_faction_iff_tag_type
-	if(faction?.faction_iff_tag_type)
-		faction_tag = new faction.faction_iff_tag_type
+	if(faction?.organ_faction_iff_tag_type && !organ_faction_tag)
+		organ_faction_tag = new faction.organ_faction_iff_tag_type(src, faction)
+	if(faction?.faction_iff_tag_type && !faction_tag)
+		faction_tag = new faction.faction_iff_tag_type(src, faction)
 	SSmapview.add_marker(src, "mob")
 
 /mob/living/carbon/Life(delta_time)

@@ -22,13 +22,13 @@
 // Hotfix for testing, until rework in proper way pregenerated objectives (TODO: REMOVE WHEN PREGENERATED SPAWNS OF OBJECTIVES REMOVED)
 /datum/cm_objective/proc/connect_objective()
 	set waitfor = FALSE
-	UNTIL(length(GLOB.faction_datum))
-	GLOB.faction_datum[controller].objectives_controller.add_objective(src)
+	UNTIL(length(GLOB.faction_datums))
+	GLOB.faction_datums[controller].objectives_controller.add_objective(src)
 
 /datum/cm_objective/Destroy()
 	if(controller)
-		GLOB.faction_datum[controller].objectives_controller.stop_processing_objective(src)
-		GLOB.faction_datum[controller].objectives_controller.remove_objective(src)
+		GLOB.faction_datums[controller].objectives_controller.stop_processing_objective(src)
+		GLOB.faction_datums[controller].objectives_controller.remove_objective(src)
 	for(var/datum/cm_objective/R as anything in required_objectives)
 		R.enables_objectives -= src
 	for(var/datum/cm_objective/E as anything in enables_objectives)
@@ -59,11 +59,11 @@
 
 // Make this objective call process() and check_completion() every SS tick.
 /datum/cm_objective/proc/activate()
-	GLOB.faction_datum[controller].objectives_controller.start_processing_objective(src)
+	GLOB.faction_datums[controller].objectives_controller.start_processing_objective(src)
 
 // Stops the Objective from processing
 /datum/cm_objective/proc/deactivate()
-	GLOB.faction_datum[controller].objectives_controller.start_processing_objective(src)
+	GLOB.faction_datums[controller].objectives_controller.start_processing_objective(src)
 
 /datum/cm_objective/proc/get_completion_status()
 	if(objective_state & OBJECTIVE_COMPLETE)

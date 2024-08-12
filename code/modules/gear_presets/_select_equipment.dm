@@ -139,17 +139,21 @@ DEFINE_BITFIELD(equipment_preset_flags, list(
 	if(!istype(new_human, /mob/living/carbon/human/dummy))
 		var/datum/faction/mob_faction
 		if(!faction)
-			mob_faction = GLOB.faction_datum[FACTION_NEUTRAL]
+			mob_faction = GLOB.faction_datums[FACTION_NEUTRAL]
 		else
-			mob_faction = GLOB.faction_datum[faction]
+			mob_faction = GLOB.faction_datums[faction]
 
 		if(mob_faction && (!new_human.faction || force_update_faction))
 			mob_faction.add_mob(new_human)
 			if(mob_faction.organ_faction_iff_tag_type)
-				new_human.organ_faction_tag = new mob_faction.organ_faction_iff_tag_type
+				if(new_human.organ_faction_tag)
+					QDEL_NULL(new_human.organ_faction_tag)
+				new_human.organ_faction_tag = new mob_faction.organ_faction_iff_tag_type(new_human, mob_faction)
 
 			if(mob_faction.faction_iff_tag_type)
-				new_human.faction_tag = new mob_faction.faction_iff_tag_type
+				if(new_human.faction_tag)
+					QDEL_NULL(new_human.faction_tag)
+				new_human.faction_tag = new mob_faction.faction_iff_tag_type(new_human, mob_faction)
 
 	load_race(new_human, mob_client)
 	if(randomise || uses_special_name)

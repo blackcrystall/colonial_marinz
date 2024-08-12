@@ -124,7 +124,7 @@
 			mapview("[SHIP_MAP_Z]")
 
 		if("evacuation_start")
-			if(faction != GLOB.faction_datum[FACTION_MARINE])
+			if(faction != GLOB.faction_datums[FACTION_MARINE])
 				return
 
 			if(security_level < SEC_LEVEL_RED)

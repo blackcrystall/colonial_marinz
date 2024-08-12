@@ -51,7 +51,7 @@ SUBSYSTEM_DEF(factions)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/factions/stat_entry(msg)
-	msg = "F:[length(GLOB.faction_datum)]|AF:[length(active_factions)]|OC:[length(GLOB.objective_controller)]|AOC:[length(active_objectives_controllers)]|O:[total_objectives]|AO:[total_active_objectives]|S:[length(sectors)]|T:[length(total_tasks)]|P:[length(processing_tasks)]"
+	msg = "F:[length(GLOB.faction_datums)]|AF:[length(active_factions)]|OC:[length(GLOB.objective_controller)]|AOC:[length(active_objectives_controllers)]|O:[total_objectives]|AO:[total_active_objectives]|S:[length(sectors)]|T:[length(total_tasks)]|P:[length(processing_tasks)]"
 	return ..()
 
 /datum/controller/subsystem/factions/fire()
@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(factions)
 		processing_tasks = 0
 
 		for(var/faction_to_get in FACTION_LIST_ALL)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			active_factions += faction
@@ -115,7 +115,7 @@ SUBSYSTEM_DEF(factions)
 			objective.process()
 			objective.check_completion()
 			if(objective.objective_state & OBJECTIVE_COMPLETE|OBJECTIVE_FAILED)
-				GLOB.faction_datum[objective.controller].objectives_controller.stop_processing_objective(objective)
+				GLOB.faction_datums[objective.controller].objectives_controller.stop_processing_objective(objective)
 
 		current_active_run.len--
 
@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(factions)
 
 	if(length(processing_tasks) < length(SSticker.mode.factions_pool) || prob(1))
 		for(var/faction_name in SSticker.mode.factions_pool)
-			var/datum/faction/faction = GLOB.faction_datum[SSticker.mode.factions_pool[faction_name]]
+			var/datum/faction/faction = GLOB.faction_datums[SSticker.mode.factions_pool[faction_name]]
 			if(make_potential_tasks(faction))
 				break
 
@@ -193,7 +193,7 @@ SUBSYSTEM_DEF(factions)
 		var/datum/objectives_datum/objectives_controller = GLOB.objective_controller[faction_to_get]
 		objectives_controller.generate_objectives()
 		connect_objectives(objectives_controller)
-		var/faction_mobs = length(GLOB.faction_datum[objectives_controller.associated_faction].totalMobs)
+		var/faction_mobs = length(GLOB.faction_datums[objectives_controller.associated_faction].totalMobs)
 		if(faction_mobs)
 			objectives_controller.corpsewar.generate_corpses(round(ground_map.map_corpses * faction_mobs / total_percent))
 
@@ -307,7 +307,7 @@ SUBSYSTEM_DEF(factions)
 	var/list/categories = list()
 	var/list/notable_objectives = list()
 
-	for(var/datum/cm_objective/C as anything in GLOB.faction_datum[faction].objectives_controller.objectives)
+	for(var/datum/cm_objective/C as anything in GLOB.faction_datums[faction].objectives_controller.objectives)
 		if(!C.observable_by_faction(faction))
 			continue
 		if(C.display_category)
@@ -325,7 +325,7 @@ SUBSYSTEM_DEF(factions)
 		complete += C.get_point_value(faction)
 
 	var/dat = ""
-	if(length(GLOB.faction_datum[faction].objectives_controller.objectives)) // protect against divide by zero
+	if(length(GLOB.faction_datums[faction].objectives_controller.objectives)) // protect against divide by zero
 		dat = "<b>Total Objectives:</b> [complete]pts achieved<br>"
 		if(length(categories))
 			var/total = 1 //To avoid divide by zero errors, just in case...
@@ -347,7 +347,7 @@ SUBSYSTEM_DEF(factions)
 /datum/controller/subsystem/factions/proc/get_scored_points(faction)
 	var/scored_points = 0
 
-	for(var/datum/cm_objective/L as anything in GLOB.faction_datum[faction].objectives_controller.objectives)
+	for(var/datum/cm_objective/L as anything in GLOB.faction_datums[faction].objectives_controller.objectives)
 		if(!L.observable_by_faction(faction))
 			continue
 		scored_points += L.get_point_value(faction)
@@ -357,7 +357,7 @@ SUBSYSTEM_DEF(factions)
 /datum/controller/subsystem/factions/proc/get_total_points(faction)
 	var/total_points = 0
 
-	for(var/datum/cm_objective/L as anything in GLOB.faction_datum[faction].objectives_controller.objectives)
+	for(var/datum/cm_objective/L as anything in GLOB.faction_datums[faction].objectives_controller.objectives)
 		if(!L.observable_by_faction(faction))
 			continue
 		total_points += L.total_point_value(faction)
@@ -367,7 +367,7 @@ SUBSYSTEM_DEF(factions)
 /datum/controller/subsystem/factions/proc/announce_stats()
 	to_chat(GLOB.observer_list, "<h2 class='alert'>Отчет по задачам</h2>")
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!faction.objectives_active)
 			continue
 

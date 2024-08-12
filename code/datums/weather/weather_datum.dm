@@ -234,8 +234,8 @@
 	for(var/deep = 1 to length(snow_dirs))
 		snows_connections[deep] = dirs_to_corner_states(snow_dirs[deep])
 
-/obj/structure/snow/proc/update_overlays()
-//	. = ..()
+/obj/structure/snow/update_overlays()
+	. = ..()
 	if(overlays)
 		overlays.Cut()
 
@@ -261,10 +261,10 @@
 		changing_layer(min(bleed_layer - round(damage / bleed_layer * 8, 1), MAX_LAYER_SNOW_LEVELS))
 		pts = 0
 
-/obj/structure/snow/get_projectile_hit_boolean(obj/projectile/proj)
+/obj/structure/snow/get_projectile_hit_boolean(obj/item/projectile/proj)
 	return FALSE
 
-/obj/structure/snow/bullet_act(obj/projectile/proj)
+/obj/structure/snow/bullet_act(obj/item/projectile/proj)
 	return FALSE
 
 /obj/structure/snow/flamer_fire_act(damage)

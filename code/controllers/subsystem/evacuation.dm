@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(evacuation)
 	if(ship_evacuating)
 		if(SHIP_ESCAPE_ESTIMATE_DEPARTURE <= 0 && ship_operation_stage_status == OPERATION_LEAVING_OPERATION_PLACE)
 			SSticker.mode.round_finished = "Marine Minor Victory"
-			SSticker.mode.faction_won = GLOB.faction_datum[FACTION_MARINE]
+			SSticker.mode.faction_won = GLOB.faction_datums[FACTION_MARINE]
 			ship_operation_stage_status = OPERATION_DEBRIEFING
 			ship_evacuating = FALSE
 
@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(evacuation)
 /datum/controller/subsystem/evacuation/proc/ship_evac_blocked()
 	if(get_security_level() != "red")
 		return "Required RED alert"
-	else if(!critical_marine_loses() && !all_faction_mobs_onboard(GLOB.faction_datum[FACTION_MARINE]))
+	else if(!critical_marine_loses() && !all_faction_mobs_onboard(GLOB.faction_datums[FACTION_MARINE]))
 		return "Not all forces onboard"
 	else if(!shuttels_onboard())
 		return "All shuttles should be loaded on ship"
@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(evacuation)
 		return TRUE
 
 /datum/controller/subsystem/evacuation/proc/critical_marine_loses()
-	if(length(GLOB.faction_datum[FACTION_MARINE].totalMobs) < length(GLOB.faction_datum[FACTION_MARINE].totalDeadMobs) * 1.25)
+	if(length(GLOB.faction_datums[FACTION_MARINE].totalMobs) < length(GLOB.faction_datums[FACTION_MARINE].totalDeadMobs) * 1.25)
 		return TRUE
 	return FALSE
 

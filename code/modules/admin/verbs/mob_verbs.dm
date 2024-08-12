@@ -337,7 +337,7 @@
 
 	var/list/datum/faction/factions = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 	var/choice = tgui_input_list(src, "Select a faction.", "Change Faction", factions)

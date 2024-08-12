@@ -39,7 +39,7 @@
 //	RegisterSignal(atom_source, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
 /*
 /datum/tacmap/atom_datum/proc/generate_icon(faction_to_get)
-	var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+	var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 	var/image/image = image(icon_file, icon_state, pixel_x = MINIMAP_PIXEL_FROM_WORLD(atom_ref.x), pixel_y = MINIMAP_PIXEL_FROM_WORLD(atom_ref.y), dir = atom_ref.dir)
 	if(recoloring)
 		image.color = get_color(faction)

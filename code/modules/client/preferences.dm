@@ -662,12 +662,12 @@ var/const/MAX_SAVE_SLOTS = 10
 //splitJobs - Allows you split the table by job. You can make different tables for each department by including their heads. Defaults to CE to make it look nice.
 //width - Screen' width. Defaults to 550 to make it look nice.
 //height - Screen's height. Defaults to 500 to make it look nice.
-/datum/preferences/proc/set_choices(mob/user, list/roles_pool, limit = 19, splitJobs = list(), width = 1200, height = 700)
+/datum/preferences/proc/set_choices(mob/user, list/roles_pool, limit = 19, splitJobs = list(JOB_CHIEF_REQUISITION, JOB_WO_CMO), width = 1200, height = 700)
 	if(!SSticker.role_authority)
 		return
 
 	if(!observing_faction)
-		observing_faction = GLOB.faction_datum[SSticker.mode.factions_pool[pick(SSticker.mode.factions_pool)]]
+		observing_faction = GLOB.faction_datums[SSticker.mode.factions_pool[pick(SSticker.mode.factions_pool)]]
 
 	roles_pool = observing_faction.roles_list[SSticker.mode.name]
 
@@ -784,7 +784,7 @@ var/const/MAX_SAVE_SLOTS = 10
 		return
 
 	if(!observing_faction)
-		observing_faction = GLOB.faction_datum[SSticker.mode.factions_pool[pick(SSticker.mode.factions_pool)]]
+		observing_faction = GLOB.faction_datums[SSticker.mode.factions_pool[pick(SSticker.mode.factions_pool)]]
 
 	roles_pool = observing_faction.roles_list[SSticker.mode.name]
 
@@ -1009,7 +1009,7 @@ var/const/MAX_SAVE_SLOTS = 10
 					if(!choice)
 						return
 
-					observing_faction = GLOB.faction_datum[SSticker.mode.factions_pool[choice]]
+					observing_faction = GLOB.faction_datums[SSticker.mode.factions_pool[choice]]
 					set_choices(user)
 				else
 					set_choices(user)
@@ -1035,7 +1035,7 @@ var/const/MAX_SAVE_SLOTS = 10
 					if(!choice)
 						return
 
-					observing_faction = GLOB.faction_datum[SSticker.mode.factions_pool[choice]]
+					observing_faction = GLOB.faction_datums[SSticker.mode.factions_pool[choice]]
 					set_job_slots(user)
 				else
 					set_job_slots(user)

@@ -762,7 +762,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/list/datum/faction/factions = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		if(!length(faction_to_set.totalMobs))
 			continue
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
@@ -823,7 +823,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Join as Zombie"
 	set desc = "Select an alive but logged-out Zombie to rejoin the game."
 
-	GLOB.faction_datum[FACTION_ZOMBIE]?.get_join_status(src)
+	GLOB.faction_datums[FACTION_ZOMBIE]?.get_join_status(src)
 
 /mob/dead/verb/join_as_freed_mob()
 	set category = "Ghost.Join"

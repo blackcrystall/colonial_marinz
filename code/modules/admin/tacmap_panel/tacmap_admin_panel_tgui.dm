@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(tacmap_admin_panel, /datum/tacmap_admin_panel, new)
 	if(!ui)
 
 		// Ensure we actually have the latest map images sent (recache can handle older/different faction maps)
-		resend_current_map_png(user, GLOB.faction_datum[faction_selected], selected_zlevel)
+		resend_current_map_png(user, GLOB.faction_datums[faction_selected], selected_zlevel)
 
 		ui = new(user, src, "TacmapAdminPanel", "Tacmap Panel")
 		ui.open()
@@ -33,11 +33,11 @@ GLOBAL_DATUM_INIT(tacmap_admin_panel, /datum/tacmap_admin_panel, new)
 	var/list/faction_times = list()
 
 	// Assumption: Length of flat_tacmap_data is the same as svg_tacmap_data
-	var/svg_length = length(GLOB.faction_datum[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"])
+	var/svg_length = length(GLOB.faction_datums[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"])
 	if(faction_selection < 0 || faction_selection >= svg_length)
 		faction_selection = svg_length - 1
 	for(var/i = 1, i <= svg_length, i++)
-		var/datum/svg_overlay/current_svg = GLOB.faction_datum[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][i]
+		var/datum/svg_overlay/current_svg = GLOB.faction_datums[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][i]
 		faction_ckeys += current_svg.ckey
 		faction_names += current_svg.name
 		faction_times += current_svg.time
@@ -50,17 +50,17 @@ GLOBAL_DATUM_INIT(tacmap_admin_panel, /datum/tacmap_admin_panel, new)
 		.["faction_svg"] = null
 	else
 		var/datum/flattened_tacmap/selected_flat = GLOB.unannounced_maps["[selected_zlevel]"][faction_selection + 1]
-		var/datum/svg_overlay/selected_svg = GLOB.faction_datum[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][faction_selection + 1]
+		var/datum/svg_overlay/selected_svg = GLOB.faction_datums[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][faction_selection + 1]
 		.["faction_map"] = selected_flat.flat_tacmap
 		.["faction_svg"] = selected_svg.svg_data
 
 
 	.["faction_selection"] = faction_selection
-	.["faction_name"] = GLOB.faction_datum[faction_selected].name
+	.["faction_name"] = GLOB.faction_datums[faction_selected].name
 	.["last_update_time"] = last_update_time
 	.["factions"] = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		var/icon = "medal"
 		if(istype(faction, /datum/faction/xenomorph))
 			icon = "star"
@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(tacmap_admin_panel, /datum/tacmap_admin_panel, new)
 			return TRUE
 
 		if("delete")
-			var/datum/svg_overlay/selected_svg =  GLOB.faction_datum[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][faction_selection + 1]
+			var/datum/svg_overlay/selected_svg =  GLOB.faction_datums[faction_selected].tcmp_faction_datum.svg_drawns["[selected_zlevel]"][faction_selection + 1]
 			selected_svg.svg_data = null
 			last_update_time = world.time
 			message_admins("[key_name_admin(usr)] deleted the <a href='?tacmaps_panel=1'>tactical map drawing</a> by [selected_svg.ckey].")

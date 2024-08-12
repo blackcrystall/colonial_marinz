@@ -128,7 +128,7 @@
 	faction_to_get = _faction_to_get
 	. = ..()
 	label = "[pick(alphabet_uppercase)][rand(100,999)]"
-	faction = GLOB.faction_datum[faction_to_get]
+	faction = GLOB.faction_datums[faction_to_get]
 	objective = new objective_type(faction_to_get, src)
 	retrieve_objective = new /datum/cm_objective/retrieve_item/document(faction_to_get, src)
 	LAZYADD(objective.enables_objectives, retrieve_objective)

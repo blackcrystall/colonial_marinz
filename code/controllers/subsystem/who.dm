@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(who)
 	))
 
 	for(var/faction_to_get in FACTION_LIST_HUMANOID - FACTION_YAUTJA - FACTION_MARINE)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!length(faction.totalMobs))
 			continue
 		new_list_data["factions"] += list(list(
@@ -166,7 +166,7 @@ SUBSYSTEM_DEF(who)
 		))
 
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!length(faction.totalMobs))
 			continue
 		new_list_data["xenomorphs"] += list(list(

@@ -36,7 +36,7 @@
 
 		var/list/datum/faction/factions = list()
 		for(var/faction_to_get in FACTION_LIST_HUMANOID)
-			var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 			LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 		var/choice = tgui_input_list(usr, "Select faction", "Faction Choice", factions)
@@ -47,7 +47,7 @@
 	else
 		switch(newrank)
 			if("Weyland-Yutani")
-				GLOB.faction_datum[FACTION_WY].add_mob(H)
+				GLOB.faction_datums[FACTION_WY].add_mob(H)
 
 				var/newskillset = tgui_input_list(usr, "Select a skillset", "Skill Set", (list("Keep Skillset") +SSticker.role_authority.roles_by_name))
 				if(!newskillset || newskillset == "Keep Skillset")
@@ -92,7 +92,7 @@
 				if(!choice)
 					return
 
-				GLOB.faction_datum[choice].add_mob(H)
+				GLOB.faction_datums[choice].add_mob(H)
 
 				var/newskillset = tgui_input_list(usr, "Select a skillset", "Skill Set", SSticker.role_authority.roles_by_name)
 				if(!newskillset)

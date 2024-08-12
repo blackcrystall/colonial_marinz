@@ -106,10 +106,10 @@
 	var/list/hive_spots = list()
 	for(var/faction in hives)
 		var/turf/spot = get_turf(pick(hive_spawns))
-		hive_spots[GLOB.faction_datum[faction]] = spot
+		hive_spots[GLOB.faction_datums[faction]] = spot
 		hive_spawns -= spot
 
-		current_hives += GLOB.faction_datum[faction].name
+		current_hives += GLOB.faction_datums[faction].name
 
 	for(var/datum/faction/faction in xenomorphs) //Build and move the xenos.
 		for(var/datum/mind/ghost_mind in xenomorphs[faction])
@@ -127,7 +127,7 @@
 		core.hardcore = TRUE // This'll make losing the hive core more detrimental than losing a Queen
 		hive_cores += core
 
-/datum/game_mode/xenovs/proc/transform_xeno(datum/mind/ghost_mind, turf/xeno_turf, datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL], should_spawn_nest = TRUE)
+/datum/game_mode/xenovs/proc/transform_xeno(datum/mind/ghost_mind, turf/xeno_turf, datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL], should_spawn_nest = TRUE)
 	if(should_spawn_nest)
 		var/mob/living/carbon/human/original = ghost_mind.current
 
@@ -157,7 +157,7 @@
 		var/mob/living/carbon/xenomorph/larva/xeno = new(xeno_turf, null, faction)
 		ghost_mind.transfer_to(xeno)
 
-/datum/game_mode/xenovs/pick_queen_spawn(datum/mind/ghost_mind, datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+/datum/game_mode/xenovs/pick_queen_spawn(datum/mind/ghost_mind, datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 	. = ..()
 	if(!.) return
 	// Spawn additional hive structures
@@ -182,7 +182,7 @@
 		if(++round_checkwin >= 5) //Only check win conditions every 5 ticks.
 			if(world.time > round_time_larva_interval)
 				for(var/faction in hives)
-					var/datum/faction/hive = GLOB.faction_datum[faction]
+					var/datum/faction/hive = GLOB.faction_datums[faction]
 					hive.stored_larva++
 					hive.faction_ui.update_burrowed_larva()
 
@@ -203,7 +203,7 @@
 /datum/game_mode/xenovs/proc/get_xenos_hive(list/z_levels = SSmapping.levels_by_any_trait(list(ZTRAIT_GROUND, ZTRAIT_RESERVED, ZTRAIT_MARINE_MAIN_SHIP)))
 	var/list/factions = list()
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!is_hive_living(faction))
 			continue
 		factions += list(faction.name = list())

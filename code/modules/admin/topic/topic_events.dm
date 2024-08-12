@@ -215,7 +215,7 @@
 
 	var/xeno_hive
 	if(istext(href_list["create_hive_list"]))
-		xeno_hive = GLOB.faction_datum[href_list["create_hive_list"]]
+		xeno_hive = GLOB.faction_datums[href_list["create_hive_list"]]
 	else
 		alert("Select fewer hive paths, (max 1)")
 		return

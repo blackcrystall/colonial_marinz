@@ -8,10 +8,11 @@
 	var/mask_y_offset = 0
 	var/effect_alpha = 0
 
-/datum/element/mob_overlay_effect/Attach(datum/target, _y_offset, _mask_y_offset)
+/datum/element/mob_overlay_effect/Attach(datum/target, _y_offset = 0, _mask_y_offset = 0, _effect_alpha = 0)
 	. = ..()
 	y_offset = _y_offset
 	mask_y_offset = _mask_y_offset
+	effect_alpha = _effect_alpha
 
 	RegisterSignal(get_turf(target), COMSIG_TURF_EXITED, TYPE_PROC_REF(/datum/element/mob_overlay_effect, on_exit), override = TRUE)
 	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, TYPE_PROC_REF(/datum/element/mob_overlay_effect, on_enter), override = TRUE)

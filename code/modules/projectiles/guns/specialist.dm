@@ -818,7 +818,7 @@
 			to_chat(user, SPAN_WARNING("The [name] is empty."))
 			return FALSE
 		var/obj/item/explosive/grenade/G = cylinder.contents[1]
-		if(G.antigrief_protection && user.faction == GLOB.faction_datum[FACTION_MARINE] && explosive_antigrief_check(G, user))
+		if(G.antigrief_protection && user.faction == GLOB.faction_datums[FACTION_MARINE] && explosive_antigrief_check(G, user))
 			to_chat(user, SPAN_WARNING("\The [name]'s safe-area accident inhibitor prevents you from firing!"))
 			msg_admin_niche("[key_name(user)] attempted to prime \a [G.name] in [get_area(src)] [ADMIN_JMP(src.loc)]")
 			return FALSE
@@ -1105,7 +1105,7 @@
 		if(skill_locked && !skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ROCKET && !(flags_mounted_gun_features & GUN_MOUNTING))
 			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
 			return FALSE
-		if(user.faction == GLOB.faction_datum[FACTION_MARINE] && explosive_antigrief_check(src, user))
+		if(user.faction == GLOB.faction_datums[FACTION_MARINE] && explosive_antigrief_check(src, user))
 			to_chat(user, SPAN_WARNING("\The [name]'s safe-area accident inhibitor prevents you from firing!"))
 			msg_admin_niche("[key_name(user)] attempted to fire \a [name] in [get_area(src)] [ADMIN_JMP(loc)]")
 			return FALSE

@@ -84,7 +84,7 @@
 	set name = "View Research Publications"
 	set src in usr
 
-	if(!usr.stat && !usr.is_mob_restrained() && usr.faction != GLOB.faction_datum[FACTION_COLONIST])
+	if(!usr.stat && !usr.is_mob_restrained() && usr.faction != GLOB.faction_datums[FACTION_COLONIST])
 		tgui_interact(usr)
 
 /obj/item/clothing/glasses/hud/health/Topic(href, href_list)

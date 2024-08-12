@@ -399,7 +399,7 @@
 	// Mostly replicated code from observer.dm.hive_status()
 	var/list/datum/faction/factions = list()
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		if(!length(faction_to_set.totalMobs) && !length(faction_to_set.totalDeadMobs))
 			continue
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
@@ -487,7 +487,7 @@
 	var/list/datum/faction/factions = list()
 	LAZYSET(factions, "All Humans", "Everyone (-Yautja)")
 	for(var/faction_to_get in FACTION_LIST_HUMANOID)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 	var/choice = tgui_input_list(usr, "Please choose faction your announcement will be shown to.", "Faction Selection", factions)
@@ -534,7 +534,7 @@
 	var/list/datum/faction/factions = list()
 	LAZYSET(factions, "All Hives", "Everyone")
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 	var/choice = tgui_input_list(usr, "Please choose the hive you want to see your announcement. Selecting \"All hives\" option will change title to \"Unknown Higher Force\"", "Hive Selection", factions)
@@ -627,7 +627,7 @@
 	var/input = input(usr, "This is a message from the predator ship's AI. Check with online staff before you send this.", "What?", "") as message|null
 	if(!input)
 		return FALSE
-	faction_announcement(SPAN_YAUTJABOLDBIG(input), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+	faction_announcement(SPAN_YAUTJABOLDBIG(input), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 	message_admins("[key_name_admin(src)] has created a predator ship AI report")
 	log_admin("[key_name_admin(src)] predator ship AI report: [input]")
 
@@ -817,7 +817,7 @@
 		if(!H || !(H.mob_flags & MUTINEER))
 			continue
 
-		GLOB.faction_datum[FACTION_NEUTRAL].add_mob(H)
+		GLOB.faction_datums[FACTION_NEUTRAL].add_mob(H)
 		H.hud_set_squad()
 
 		for(var/datum/action/human_action/activable/mutineer/action in H.actions)

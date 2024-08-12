@@ -204,7 +204,7 @@
 	message_admins("Distress beacon: '[name]' activated [src.hostility? "[SPAN_WARNING("(THEY ARE HOSTILE)")]":"(they are friendly)"]. Looking for candidates.")
 
 	if(!quiet_launch)
-		faction_announcement("A distress beacon has been launched from the [MAIN_SHIP_NAME].", "Priority Alert", 'sound/AI/distressbeacon.ogg', GLOB.faction_datum[FACTION_MARINE], logging = ARES_LOG_SECURITY)
+		faction_announcement("A distress beacon has been launched from the [MAIN_SHIP_NAME].", "Priority Alert", 'sound/AI/distressbeacon.ogg', GLOB.faction_datums[FACTION_MARINE], logging = ARES_LOG_SECURITY)
 
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/emergency_call, spawn_candidates), quiet_launch, announce, override_spawn_loc, announce_dispatch_message), 30 SECONDS)
 
@@ -220,7 +220,7 @@
 		candidates = list()
 
 		if(!quiet_launch)
-			faction_announcement("The distress signal has not received a response, the launch tubes are now recalibrating.", "Distress Beacon", GLOB.faction_datum[FACTION_MARINE], logging = ARES_LOG_SECURITY)
+			faction_announcement("The distress signal has not received a response, the launch tubes are now recalibrating.", "Distress Beacon", GLOB.faction_datums[FACTION_MARINE], logging = ARES_LOG_SECURITY)
 		return
 
 	//We've got enough!
@@ -250,7 +250,7 @@
 					to_chat(I.current, SPAN_WARNING("You didn't get selected to join the distress team. Better luck next time!"))
 
 	if(announce)
-		faction_announcement(dispatch_message, "Distress Beacon", 'sound/AI/distressreceived.ogg', GLOB.faction_datum[FACTION_MARINE], logging = ARES_LOG_SECURITY) //Announcement that the Distress Beacon has been answered, does not hint towards the chosen ERT
+		faction_announcement(dispatch_message, "Distress Beacon", 'sound/AI/distressreceived.ogg', GLOB.faction_datums[FACTION_MARINE], logging = ARES_LOG_SECURITY) //Announcement that the Distress Beacon has been answered, does not hint towards the chosen ERT
 
 	message_admins("Distress beacon: [src.name] finalized, setting up candidates.")
 

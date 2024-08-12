@@ -273,7 +273,7 @@
 	hijack.fire()
 	GLOB.alt_ctrl_disabled = TRUE
 
-	faction_announcement("Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.", "Dropship Alert", 'sound/AI/hijack.ogg', GLOB.faction_datum[FACTION_MARINE], logging = ARES_LOG_SECURITY)
+	faction_announcement("Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.", "Dropship Alert", 'sound/AI/hijack.ogg', GLOB.faction_datums[FACTION_MARINE], logging = ARES_LOG_SECURITY)
 	var/datum/ares_link/link = GLOB.ares_link
 	link.log_ares_flight("Unknown", "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.")
 

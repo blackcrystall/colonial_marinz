@@ -26,7 +26,7 @@
 	transform_to_xeno(H, FACTION_XENOMORPH_NORMAL)
 
 /datum/job/antag/xenos/proc/transform_to_xeno(mob/living/carbon/human/human_to_transform, faction_index)
-	var/datum/faction/faction = GLOB.faction_datum[faction_index]
+	var/datum/faction/faction = GLOB.faction_datums[faction_index]
 
 	human_to_transform.first_xeno = TRUE
 	human_to_transform.set_stat(UNCONSCIOUS)

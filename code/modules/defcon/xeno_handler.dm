@@ -17,7 +17,7 @@
 /datum/emergency_call/xeno_handler/spawn_items()
 	var/turf/drop_spawn = get_spawn_point(TRUE)
 	if(istype(drop_spawn))
-		new /obj/effect/alien/weeds/node(drop_spawn, null, null, GLOB.faction_datum[FACTION_XENOMORPH_TAMED]) //drop some weeds for xeno plasma regen.
+		new /obj/effect/alien/weeds/node(drop_spawn, null, null, GLOB.faction_datums[FACTION_XENOMORPH_TAMED]) //drop some weeds for xeno plasma regen.
 
 /datum/emergency_call/xeno_handler/create_member(datum/mind/M)
 	var/turf/spawn_loc = get_spawn_point()
@@ -31,16 +31,16 @@
 		new_mob.create_hud()
 		arm_equipment(new_mob, /datum/equipment_preset/pmc/xeno_handler, TRUE, TRUE)
 
-		var/datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_TAMED]
+		var/datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_TAMED]
 		faction.add_mob(new_mob)
 		faction.make_leader(new_mob)
 		leader = new_mob
 	else
 		var/picked = pick(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/lurker)
-		new_mob = new picked(spawn_loc, null, GLOB.faction_datum[FACTION_XENOMORPH_TAMED])
+		new_mob = new picked(spawn_loc, null, GLOB.faction_datums[FACTION_XENOMORPH_TAMED])
 		var/mob/living/carbon/xenomorph/X = new_mob
-		X.faction_tag = new /obj/item/faction_tag/wy/pmc_handler()
-		X.organ_faction_tag = new /obj/item/faction_tag/wy/pmc_handler()
+		X.faction_tag = new /obj/item/faction_tag/wy/pmc_handler(X, GLOB.faction_datums[FACTION_USCM])
+		X.organ_faction_tag = new /obj/item/faction_tag/wy/pmc_handler(X, GLOB.faction_datums[FACTION_XENOMORPH_TAMED])
 
 	if(M)
 		M.transfer_to(new_mob, TRUE)

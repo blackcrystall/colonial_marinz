@@ -79,7 +79,7 @@
 
 /area/adminlevel/bunker01/caves/xeno/Initialize()
 	. = ..()
-	faction = GLOB.faction_datum[FACTION_XENOMORPH_ALPHA]
+	faction = GLOB.faction_datums[FACTION_XENOMORPH_ALPHA]
 
 /area/adminlevel/bunker01/caves/xeno/Entered(atom/movable/arrived, old_loc)
 	. = ..()

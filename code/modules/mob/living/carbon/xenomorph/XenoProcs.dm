@@ -1,5 +1,5 @@
 //Send a message to all xenos. Mostly used in the deathgasp display
-/proc/xeno_message(message, size = 3, datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+/proc/xeno_message(message, size = 3, datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 	if(!message)
 		return
 
@@ -17,7 +17,7 @@
 			to_chat(mob, SPAN_XENODANGER("<span class=\"[fontsize_style]\"> [message]</span>"))
 
 //Sends a maptext alert to our currently selected squad. Does not make sound.
-/proc/xeno_maptext(text, title_text, datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+/proc/xeno_maptext(text, title_text, datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 	if(!text || !faction)
 		return
 

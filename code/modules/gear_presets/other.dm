@@ -632,9 +632,11 @@
 	if(!faction)
 		faction = FACTION_NEUTRAL
 
-	GLOB.faction_datum[faction].add_mob(new_human)
+	GLOB.faction_datums[faction].add_mob(new_human)
 	if(new_human.faction?.organ_faction_iff_tag_type)
-		new_human.organ_faction_tag = new new_human.faction.organ_faction_iff_tag_type
+		if(new_human.organ_faction_tag)
+			QDEL_NULL(new_human.organ_faction_tag)
+		new_human.organ_faction_tag = new new_human.faction.organ_faction_iff_tag_type(new_human, new_human.faction)
 
 	if(randomise)
 		load_name(new_human)

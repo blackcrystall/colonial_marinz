@@ -37,7 +37,6 @@
 	var/list/linked_sectors
 	var/list/linked_pylons
 	var/obj/effect/alien/weeds/weeds
-	var/obj/structure/snow/snow
 	var/list/datum/automata_cell/autocells
 	var/list/obj/effect/decal/cleanable/cleanables
 

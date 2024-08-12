@@ -41,7 +41,7 @@
 /datum/game_mode/humanvs/pre_setup()
 	if(prob(20))
 		for(var/faction_name in factions_pool)
-			var/datum/faction/faction = GLOB.faction_datum[factions_pool[faction_name]]
+			var/datum/faction/faction = GLOB.faction_datums[factions_pool[faction_name]]
 			faction.objectives_active = TRUE
 			if(SSfactions.make_potential_tasks(faction, TRUE))
 				break
@@ -102,7 +102,7 @@
 
 	var/list/alive_factions = list()
 	for(var/faction_name in SSticker.mode.factions_pool)
-		var/datum/faction/faction = GLOB.faction_datum[SSticker.mode.factions_pool[faction_name]]
+		var/datum/faction/faction = GLOB.faction_datums[SSticker.mode.factions_pool[faction_name]]
 		if(!length(faction.totalMobs))
 			continue
 		alive_factions += faction

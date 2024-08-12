@@ -112,7 +112,7 @@
 
 /atom/movable/Initialize(mapload, ...)
 	if(!faction && faction_to_get)
-		faction = GLOB.faction_datum[faction_to_get]
+		faction = GLOB.faction_datums[faction_to_get]
 	. = ..()
 	switch(blocks_emissive)
 		if(EMISSIVE_BLOCK_GENERIC)

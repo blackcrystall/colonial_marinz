@@ -2,7 +2,7 @@
 	var/count = 0
 	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
 		if(H.faction)
-			if(H.faction == GLOB.faction_datum[faction_name])
+			if(H.faction == GLOB.faction_datums[faction_name])
 				count++
 	return count
 

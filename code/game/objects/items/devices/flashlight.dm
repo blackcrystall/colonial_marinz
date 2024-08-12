@@ -543,7 +543,7 @@
 
 /obj/item/device/flashlight/flare/signal/debug/activate_signal()
 	turn_light(null, TRUE)
-	faction = GLOB.faction_datum[FACTION_MARINE]
+	faction = GLOB.faction_datums[FACTION_MARINE]
 	signal = new(src)
 	signal.target_id = ++cas_tracking_id_increment
 	name += " [rand(100, 999)]"

@@ -1,9 +1,9 @@
 //xenomorph hive announcement
-/proc/xeno_announcement(message, datum/faction/faction_to_display = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL], title = QUEEN_ANNOUNCE)
+/proc/xeno_announcement(message, datum/faction/faction_to_display = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL], title = QUEEN_ANNOUNCE)
 	var/list/targets = GLOB.dead_mob_list.Copy()
 	if(faction_to_display == "Everyone")
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			for(var/mob/mob as anything in faction.totalMobs)
 				if(mob.stat != CONSCIOUS)
 					continue
@@ -18,9 +18,9 @@
 
 
 //general faction announcement
-/proc/faction_announcement(message, title = COMMAND_ANNOUNCE, sound_to_play = sound('sound/misc/notice2.ogg'), datum/faction/faction_to_display = GLOB.faction_datum[FACTION_MARINE], signature, logging = ARES_LOG_MAIN)
+/proc/faction_announcement(message, title = COMMAND_ANNOUNCE, sound_to_play = sound('sound/misc/notice2.ogg'), datum/faction/faction_to_display = GLOB.faction_datums[FACTION_MARINE], signature, logging = ARES_LOG_MAIN)
 	var/list/targets = GLOB.dead_mob_list.Copy()
-	if(faction_to_display == GLOB.faction_datum[FACTION_MARINE])
+	if(faction_to_display == GLOB.faction_datums[FACTION_MARINE])
 		var/datum/ares_link/link = GLOB.ares_link
 		if(ares_can_log())
 			switch(logging)
@@ -31,7 +31,7 @@
 
 	if(faction_to_display == "Everyone (-Yautja)")
 		for(var/faction_to_get in FACTION_LIST_HUMANOID - FACTION_YAUTJA)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			for(var/mob/mob as anything in faction.totalMobs)
 				if(mob.stat != CONSCIOUS)
 					continue

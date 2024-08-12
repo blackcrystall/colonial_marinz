@@ -38,7 +38,7 @@
 	RegisterSignal(SSdcs, COMSIG_GLOB_DS_FIRST_LANDED, PROC_REF(on_landing))
 
 /datum/objectives_datum/proc/check_status()
-	if(length(GLOB.faction_datum[associated_faction].totalMobs))
+	if(length(GLOB.faction_datums[associated_faction].totalMobs))
 		return TRUE
 	return FALSE
 
@@ -57,7 +57,7 @@
 		objective_spawns[objective_spawn_name] += new /datum/objective_spawn_handler(objective_spawn_name, objective_spawn_weight, objective_spawn_location)
 
 /datum/objectives_datum/proc/generate_objectives()
-	var/datum/faction/faction = GLOB.faction_datum[associated_faction]
+	var/datum/faction/faction = GLOB.faction_datums[associated_faction]
 	if(!faction.objectives_active && length(faction.objectives))
 		return
 
@@ -134,7 +134,7 @@
 /datum/objectives_datum/proc/check_defcon_level()
 	last_objectives_scored_points = SSfactions.get_scored_points(associated_faction) + additional_points
 	last_objectives_total_points = SSfactions.get_total_points(associated_faction)
-	player_points_defcon = (level_triggers_modificator * max(length(GLOB.faction_datum[associated_faction].totalMobs), 1) + level_triggers_additional_points) * real_current_level * 0.65
+	player_points_defcon = (level_triggers_modificator * max(length(GLOB.faction_datums[associated_faction].totalMobs), 1) + level_triggers_additional_points) * real_current_level * 0.65
 	last_objectives_completion_percentage = check_objectives_percentage()
 	if(current_level > 1)
 		if(last_objectives_scored_points > player_points_defcon)
@@ -145,10 +145,10 @@
 		current_level--
 		real_current_level++
 		remaining_reward_points +=  REWARD_POINT_GAIN_PER_LEVEL * real_current_level + REWARD_POINT_GAIN_PER_LEVEL
-		level_triggers_additional_points += rand(level_triggers_modificator, length(GLOB.faction_datum[associated_faction].totalMobs) * 4)
+		level_triggers_additional_points += rand(level_triggers_modificator, length(GLOB.faction_datums[associated_faction].totalMobs) * 4)
 		chemical_data.update_credits(real_current_level * 4)
 		announce_level()
-		SSticker.mode.defcon_event(GLOB.faction_datum[associated_faction], real_current_level)
+		SSticker.mode.defcon_event(GLOB.faction_datums[associated_faction], real_current_level)
 
 /datum/objectives_datum/proc/add_reward_points(amount)
 	remaining_reward_points += amount
@@ -157,9 +157,9 @@
 	additional_points += amount
 
 /datum/objectives_datum/proc/announce_level()
-	var/name = "[r_uppertext(GLOB.faction_datum[associated_faction])] DEFCON LEVEL LOWERED"
+	var/name = "[r_uppertext(GLOB.faction_datums[associated_faction])] DEFCON LEVEL LOWERED"
 	var/input = "THREAT ASSESSMENT LEVEL INCREASED TO [last_objectives_completion_percentage]%.\n\nDEFCON level lowered to [current_level]. Additional assets have been authorised to handle the situation."
-	faction_announcement(input, name, 'sound/AI/commandreport.ogg', GLOB.faction_datum[associated_faction])
+	faction_announcement(input, name, 'sound/AI/commandreport.ogg', GLOB.faction_datums[associated_faction])
 	if(associated_faction == FACTION_MARINE)
 		SSticker.mode.round_statistics.defcon_level = current_level
 
@@ -217,7 +217,7 @@
 	var/reward_name
 
 /datum/objectives_reward/proc/announce_reward(name = "SPECIAL ASSETS AUTHORISED")
-	faction_announcement(announcement_message, name, 'sound/misc/notice2.ogg', GLOB.faction_datum[associated_faction])
+	faction_announcement(announcement_message, name, 'sound/misc/notice2.ogg', GLOB.faction_datums[associated_faction])
 
 /datum/objectives_reward/proc/apply_reward(datum/objectives_datum/d)
 	if(d.remaining_reward_points < cost)
@@ -252,7 +252,7 @@
 			O.ordernum = supply_controller.ordernum
 			supply_controller.ordernum++
 			O.object = supply_controller.supply_packs[reward_name]
-			O.orderedby = GLOB.faction_datum[associated_faction]
+			O.orderedby = GLOB.faction_datums[associated_faction]
 			supply_controller.shoppinglist += O
 
 	d.remaining_reward_points -= cost

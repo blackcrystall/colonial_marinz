@@ -20,7 +20,7 @@
 
 	new_member.transfer_to(new_xeno, TRUE)
 
-	new_xeno.set_hive_and_update(GLOB.faction_datum[FACTION_XENOMORPH_FORSAKEN])
+	new_xeno.set_hive_and_update(GLOB.faction_datums[FACTION_XENOMORPH_FORSAKEN])
 	new_xeno.lock_evolve = TRUE
 
 	QDEL_NULL(current_mob)

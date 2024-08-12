@@ -58,13 +58,13 @@
 	if(!terminal.powered())
 		terminal.visible_message(SPAN_WARNING("\The [terminal] powers down mid-operation as the area looses power."))
 		playsound(terminal, 'sound/machines/terminal_shutdown.ogg', 25, 1)
-		GLOB.faction_datum[controller].objectives_controller.stop_processing_objective(src)
+		GLOB.faction_datums[controller].objectives_controller.stop_processing_objective(src)
 		uploading = FALSE
 		return
 	if(!GLOB.objective_controller[controller].comms.objective_state == OBJECTIVE_COMPLETE)
 		terminal.visible_message(SPAN_WARNING("\The [terminal] stops mid-operation due to a network connection error."))
 		playsound(terminal, 'sound/machines/terminal_shutdown.ogg', 25, 1)
-		GLOB.faction_datum[controller].objectives_controller.stop_processing_objective(src)
+		GLOB.faction_datums[controller].objectives_controller.stop_processing_objective(src)
 		uploading = FALSE
 		return
 
@@ -117,7 +117,7 @@
 	if(!reader.powered())
 		reader.visible_message(SPAN_WARNING("\The [reader] powers down mid-operation as the area looses power."))
 		playsound(reader, 'sound/machines/terminal_shutdown.ogg', 25, 1)
-		GLOB.faction_datum[controller].objectives_controller.stop_processing_objective(src)
+		GLOB.faction_datums[controller].objectives_controller.stop_processing_objective(src)
 		disk.forceMove(reader.loc)
 		reader.disk = null
 		return

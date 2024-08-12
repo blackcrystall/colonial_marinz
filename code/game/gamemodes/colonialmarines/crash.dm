@@ -97,7 +97,7 @@
 /datum/game_mode/crash/pre_setup()
 	if(SSticker.role_authority)
 		for(var/datum/squad/squad as anything in SSticker.role_authority.squads)
-			if(squad.faction == GLOB.faction_datum[FACTION_MARINE] && squad.name != "Root" && squad.name != "Alpha")
+			if(squad.faction == GLOB.faction_datums[FACTION_MARINE] && squad.name != "Root" && squad.name != "Alpha")
 				squad.roundstart = FALSE
 				squad.usable = FALSE
 
@@ -107,10 +107,10 @@
 	qdel(NS)
 	var/obj/effect/landmark/crash/resin_silo_spawn/RSS = SAFEPICK(GLOB.resin_silo_spawn_locs)
 	if(RSS)
-		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, null, GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, null, GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 		core.crash_mode = TRUE
 		GLOB.xeno_resin_silos += core
-	new /obj/structure/alien/weeds(RSS.loc, null, null, GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+	new /obj/structure/alien/weeds(RSS.loc, null, null, GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 	qdel(RSS)
 
 	for(var/i in GLOB.shuttle_controls)

@@ -1,6 +1,3 @@
-/datum/player_entity/proc/check_eye()
-	return
-
 /datum/player_entity/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -129,9 +126,6 @@
 				"statistics_list" = statistics_list,
 			)
 	return data
-
-/datum/entity/statistic_round/proc/check_eye()
-	return
 
 /datum/entity/statistic_round/proc/update_panel_data()
 	var/map_name

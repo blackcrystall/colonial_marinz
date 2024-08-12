@@ -26,7 +26,7 @@
 
 	var/mob/current_mob = mind.current
 
-	var/datum/faction/faction = GLOB.faction_datum[pick(FACTION_LIST_XENOMORPH)]
+	var/datum/faction/faction = GLOB.faction_datums[pick(FACTION_LIST_XENOMORPH)]
 	var/mob/living/carbon/xenomorph/new_xeno
 	if(!leader)
 		new_xeno = new /mob/living/carbon/xenomorph/ravager(spawn_loc, null, faction)

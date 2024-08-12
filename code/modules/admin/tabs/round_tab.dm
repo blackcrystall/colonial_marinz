@@ -142,7 +142,7 @@
 			return
 
 	if(SSticker.mode.faction_round_end_state[winstate])
-		SSticker.mode.faction_won = GLOB.faction_datum[SSticker.mode.faction_round_end_state[winstate]]
+		SSticker.mode.faction_won = GLOB.faction_datums[SSticker.mode.faction_round_end_state[winstate]]
 	SSticker.mode.round_finished = winstate
 	SSticker.force_ending = TRUE
 

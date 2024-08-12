@@ -525,7 +525,7 @@
 
 /obj/effect/landmark/zombie/Initialize(mapload, ...)
 	. = ..()
-	GLOB.faction_datum[FACTION_ZOMBIE].force_spawning = TRUE
+	GLOB.faction_datums[FACTION_ZOMBIE].force_spawning = TRUE
 	GLOB.zombie_landmarks += src
 
 /obj/effect/landmark/zombie/Destroy()

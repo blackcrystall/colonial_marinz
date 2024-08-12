@@ -57,7 +57,7 @@
 /datum/action/observer_action/view_faction_status/action_activate()
 	var/list/datum/faction/factions = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		if(!length(faction_to_set.totalMobs))
 			continue
 		LAZYSET(factions, faction_to_set.name, faction_to_set)

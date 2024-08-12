@@ -15,13 +15,13 @@ SUBSYSTEM_DEF(xevolution)
 
 /datum/controller/subsystem/xevolution/Initialize(start_timeofday)
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		boost_power[faction] = 1
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/xevolution/fire(resumed = FALSE)
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!faction)
 			continue
 

@@ -245,7 +245,7 @@
 
 	if(SSticker.mode.latejoin_larva_drop && SSticker.mode.latejoin_tally >= SSticker.mode.latejoin_larva_drop)
 		SSticker.mode.latejoin_tally -= SSticker.mode.latejoin_larva_drop
-		var/datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+		var/datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 		faction.stored_larva++
 		faction.faction_ui.update_burrowed_larva()
 
@@ -268,7 +268,7 @@
 /mob/new_player/proc/LateChoices()
 	var/list/faction_to_get_list = list()
 	for(var/faction_to_get in SSticker.mode.factions_pool)
-		var/datum/faction/faction = GLOB.faction_datum[SSticker.mode.factions_pool[faction_to_get]]
+		var/datum/faction/faction = GLOB.faction_datums[SSticker.mode.factions_pool[faction_to_get]]
 		if(!faction.spawning_enabled || (!faction.force_spawning && !faction.weight_act[SSticker.mode.name]))
 			continue
 		faction_to_get_list += faction_to_get
@@ -277,7 +277,7 @@
 	if(!choice)
 		return
 
-	GLOB.faction_datum[SSticker.mode.factions_pool[choice]].get_join_status(src)
+	GLOB.faction_datums[SSticker.mode.factions_pool[choice]].get_join_status(src)
 
 
 /mob/new_player/proc/create_character(is_late_join = FALSE)
@@ -329,7 +329,7 @@
 /mob/new_player/proc/ViewManifest()
 	var/list/datum/faction/factions = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 		if(!length(faction_to_set.totalMobs))
 			continue
 		LAZYSET(factions, faction_to_set.name, faction_to_set)
@@ -360,7 +360,7 @@
 /datum/hive_leaders/ui_data(mob/user)
 	var/list/data = list()
 
-	var/datum/faction/main_hive = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+	var/datum/faction/main_hive = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 	var/list/queens = list()
 	if(main_hive.living_xeno_queen)
 		queens += list(list("designation" = main_hive.living_xeno_queen.full_designation, "caste_type" = main_hive.living_xeno_queen.name))

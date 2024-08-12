@@ -559,7 +559,7 @@
 	for(var/mob/living/carbon/human/M in sortmob)
 		if(!M.client || M.species.name == "Yautja")
 			continue
-		if(M.faction == GLOB.faction_datum[FACTION_COLONIST])
+		if(M.faction == GLOB.faction_datums[FACTION_COLONIST])
 			survivorlist.Add(M)
 	return survivorlist
 

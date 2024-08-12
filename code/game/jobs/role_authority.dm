@@ -215,7 +215,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 	unassigned_players = null
 
 	// Now we take spare unfilled xeno slots and make them larva NEW
-	var/datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+	var/datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 	var/datum/job/antag/xenos/xenomorph = GET_MAPPED_ROLE(JOB_XENOMORPH)
 	if(istype(faction) && istype(xenomorph))
 		faction.stored_larva += max(0, (xenomorph.total_positions - xenomorph.current_positions) \
@@ -227,7 +227,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 /datum/authority/branch/role/proc/set_up_roles()
 	roles_for_mode = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(length(faction.roles_list[SSticker.mode.name]))
 			for(var/role_name in faction.roles_list[SSticker.mode.name])
 				var/datum/job/job = roles_by_name[role_name]
@@ -315,7 +315,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 
 /datum/authority/branch/role/proc/assign_role(mob/new_player/M, datum/job/job, latejoin = FALSE)
 	if(ismob(M) && istype(job))
-		var/datum/faction/faction = GLOB.faction_datum[roles_by_faction[job.title]]
+		var/datum/faction/faction = GLOB.faction_datums[roles_by_faction[job.title]]
 		var/check_result = check_role_entry(M, job, faction, latejoin)
 		if(!check_result)
 			M.job = job.title

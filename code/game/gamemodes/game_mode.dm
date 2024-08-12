@@ -54,7 +54,7 @@ var/global/cas_tracking_id_increment = 0 //this var used to assign unique tracki
 		GLOB.available_taskbar_icons |= taskbar_icon
 
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(length(faction.roles_list[name]))
 			factions_pool[faction.name] = faction.faction_name
 			active_roles_mappings_pool += faction.role_mappings[name]
@@ -244,7 +244,7 @@ var/global/cas_tracking_id_increment = 0 //this var used to assign unique tracki
 	var/list/mobs = list()
 	for(var/faction_name in factions_pool)
 		var/faction_to_get = factions_pool[faction_name]
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		for(var/mob/mob in faction.totalMobs)
 			if(mob.client)
 				mobs += mob

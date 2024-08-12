@@ -329,7 +329,7 @@
 		if(current_mob.stat != CONSCIOUS || isyautja(current_mob))
 			humans_other -= current_mob
 			continue
-		if(current_mob.faction == GLOB.faction_datum[FACTION_MARINE])
+		if(current_mob.faction == GLOB.faction_datums[FACTION_MARINE])
 			humans_uscm += current_mob
 			humans_other -= current_mob
 
@@ -338,7 +338,7 @@
 		announcement_helper("WARNING.\n\nDETONATION IN [round(timeleft/10)] SECONDS.", "HQ Intel Division", humans_other, 'sound/misc/notice1.ogg')
 		//preds part
 		var/t_left = duration2text_sec(round(rand(timeleft - timeleft / 10, timeleft + timeleft / 10)))
-		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nYou have approximately [t_left] seconds to abandon the hunting grounds before activation of human Purification Device."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nYou have approximately [t_left] seconds to abandon the hunting grounds before activation of human Purification Device."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 		//xenos part
 		var/warning
 		if(timer_warning & NUKE_SHOW_TIMER_HALF)
@@ -348,7 +348,7 @@
 		else
 			warning = "DISABLE IT! NOW!"
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			xeno_announcement(SPAN_XENOANNOUNCE(warning), faction, XENO_GENERAL_ANNOUNCE)
@@ -358,18 +358,18 @@
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE ACTIVATED.\n\nDETONATION IN [round(timeleft/10)] SECONDS.", "[MAIN_AI_SYSTEM] Nuclear Tracker", humans_uscm, 'sound/misc/notice1.ogg')
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE ACTIVATED.\n\nDETONATION IN [round(timeleft/10)] SECONDS.", "HQ Nuclear Tracker", humans_other, 'sound/misc/notice1.ogg')
 		var/t_left = duration2text_sec(round(rand(timeleft - timeleft / 10, timeleft + timeleft / 10)))
-		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>A human Purification Device has been detected. You have approximately [t_left] to abandon the hunting grounds before it activates."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>A human Purification Device has been detected. You have approximately [t_left] to abandon the hunting grounds before it activates."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			xeno_announcement(SPAN_XENOANNOUNCE("The tallhosts have deployed a hive killer at [get_area_name(loc)]! Stop it at all costs!"), faction, XENO_GENERAL_ANNOUNCE)
 	else
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE DEACTIVATED.", "[MAIN_AI_SYSTEM] Nuclear Tracker", humans_uscm, 'sound/misc/notice1.ogg')
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE DEACTIVATED.", "HQ Intel Division", humans_other, 'sound/misc/notice1.ogg')
-		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>The human Purification Device's signature has disappeared."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>The human Purification Device's signature has disappeared."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			xeno_announcement(SPAN_XENOANNOUNCE("The hive killer has been disabled! Rejoice!"), faction, XENO_GENERAL_ANNOUNCE)
@@ -572,7 +572,7 @@
 			if(current_human.stat != CONSCIOUS || isyautja(current_human))
 				humans_other -= current_mob
 				continue
-		if(current_mob.faction == GLOB.faction_datum[FACTION_MARINE])
+		if(current_mob.faction == GLOB.faction_datums[FACTION_MARINE])
 			humans_uscm += current_mob
 			humans_other -= current_mob
 
@@ -581,9 +581,9 @@
 			announcement_helper("DECRYPTION COMPLETE", "[MAIN_AI_SYSTEM] Nuclear Tracker", humans_uscm, 'sound/misc/notice1.ogg')
 			announcement_helper("DECRYPTION COMPLETE", "HQ Intel Division", humans_other, 'sound/misc/notice1.ogg')
 
-			faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nThe human Purification Device is able to be activated."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+			faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nThe human Purification Device is able to be activated."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 			for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-				var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+				var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 				if(!length(faction.totalMobs))
 					continue
 				xeno_announcement(SPAN_XENOANNOUNCE("The hive killer is ready to be activated! Assault at once!"), faction, XENO_GENERAL_ANNOUNCE)
@@ -594,7 +594,7 @@
 
 		//preds part
 		var/time_left = duration2text_sec(round(rand(decryption_time - decryption_time / 10, decryption_time + decryption_time / 10)))
-		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nYou have approximately [time_left] seconds to abandon the hunting grounds before human Purification Device is able to be activated."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!\n\nYou have approximately [time_left] seconds to abandon the hunting grounds before human Purification Device is able to be activated."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 
 		//xenos part
 		var/warning = "Hive killer is almost prepared to be activated!"
@@ -602,7 +602,7 @@
 			warning = "Hive killer is halfway through its initial phase!"
 
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			xeno_announcement(SPAN_XENOANNOUNCE(warning), faction, XENO_GENERAL_ANNOUNCE)
@@ -612,9 +612,9 @@
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE DECRYPTION STARTED.\n\nDECRYPTION IN [round(decryption_time/10)] SECONDS.", "[MAIN_AI_SYSTEM] Nuclear Tracker", humans_uscm, 'sound/misc/notice1.ogg')
 		announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE ORDNANCE DECRYPTION STARTED.\n\nDECRYPTION IN [round(decryption_time/10)] SECONDS.", "HQ Nuclear Tracker", humans_other, 'sound/misc/notice1.ogg')
 		var/time_left = duration2text_sec(round(rand(decryption_time - decryption_time / 10, decryption_time + decryption_time / 10)))
-		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>A human Purification Device has been detected. You have approximately [time_left] before it finishes its initial phase."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+		faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>A human Purification Device has been detected. You have approximately [time_left] before it finishes its initial phase."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!length(faction.totalMobs))
 				continue
 			xeno_announcement(SPAN_XENOANNOUNCE("The tallhosts have started the initial phase of a hive killer at [get_area_name(loc)]! Destroy their communications relays!"), faction, XENO_GENERAL_ANNOUNCE)
@@ -622,9 +622,9 @@
 
 	announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE DECRYPTION HALTED.", "[MAIN_AI_SYSTEM] Nuclear Tracker", humans_uscm, 'sound/misc/notice1.ogg')
 	announcement_helper("ALERT.\n\nNUCLEAR EXPLOSIVE DECRYPTION HALTED.", "HQ Intel Division", humans_other, 'sound/misc/notice1.ogg')
-	faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>The human Purification Device's signature has disappeared."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datum[FACTION_YAUTJA])
+	faction_announcement(SPAN_YAUTJABOLDBIG("WARNING!<br>The human Purification Device's signature has disappeared."), YAUTJA_ANNOUNCE, sound('sound/misc/notice1.ogg'), GLOB.faction_datums[FACTION_YAUTJA])
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!length(faction.totalMobs))
 			continue
 		xeno_announcement(SPAN_XENOANNOUNCE("The hive killer's initial phase has been halted! Rejoice!"), faction, XENO_GENERAL_ANNOUNCE)

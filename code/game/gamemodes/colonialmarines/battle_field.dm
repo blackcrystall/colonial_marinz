@@ -340,7 +340,7 @@
 		return
 
 	if(event_data.xenos)
-		var/datum/faction_status/xeno/hive = GLOB.faction_datum[event_data.xenos]
+		var/datum/faction_status/xeno/hive = GLOB.faction_datums[event_data.xenos]
 		if(hive.slashing_allowed != XENO_SLASH_ALLOWED)
 			hive.slashing_allowed = XENO_SLASH_ALLOWED //Allows harm intent for aliens
 

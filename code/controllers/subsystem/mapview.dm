@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(mapview)
 	var/generating_coldown = 60 MINUTES
 	COOLDOWN_DECLARE(generate_minimaps)
 
-	var/list/datum/tacmap/faction_datum/faction_tcmp = list()
+	var/list/datum/tacmap/faction_datums/faction_tcmp = list()
 	var/list/datum/tacmap/minimap/minimaps_by_trait = list()
 	var/list/datum/tacmap/atom_datum/assoc_atom_datums = list()
 	var/list/atom/movable/screen/minimap/hud_by_zlevel = list()

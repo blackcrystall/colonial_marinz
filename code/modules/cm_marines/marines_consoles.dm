@@ -748,7 +748,7 @@ GLOBAL_LIST_EMPTY_TYPED(crewmonitor, /datum/crewmonitor)
 	..()
 
 	if(!faction_to_get && faction_to_get)
-		faction = GLOB.faction_datum[faction_to_get]
+		faction = GLOB.faction_datums[faction_to_get]
 	else
 		faction = faction_to_set
 

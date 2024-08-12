@@ -56,7 +56,7 @@
 /proc/update_living_queens() // needed to update when you change a queen to a different hive
 	outer_loop:
 		for(var/faction_to_get in FACTION_LIST_ALL)
-			var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 			if(faction_to_set.living_xeno_queen)
 				if(faction_to_set.living_xeno_queen.faction == faction_to_set)
 					continue

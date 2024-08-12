@@ -16,7 +16,7 @@
 	if(!istype(target, /obj/item/projectile))
 		return ELEMENT_INCOMPATIBLE
 
-	if(!GLOB.faction_datum[iff_group])
+	if(!GLOB.faction_datums[iff_group])
 		RegisterSignal(target, COMSIG_BULLET_USER_EFFECTS, PROC_REF(set_iff))
 	else
 		src.iff_group = iff_group
@@ -33,7 +33,7 @@
 /datum/element/bullet_trait_iff/proc/check_iff(datum/target, mob/living/carbon/human/projectile_target)
 	SIGNAL_HANDLER
 
-	if(projectile_target.ally(GLOB.faction_datum[iff_group]))
+	if(projectile_target.ally(GLOB.faction_datums[iff_group]))
 		return COMPONENT_SKIP_MOB
 
 /datum/element/bullet_trait_iff/proc/set_iff(datum/target, mob/living/carbon/human/firer)

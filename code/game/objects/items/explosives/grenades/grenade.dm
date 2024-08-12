@@ -63,7 +63,7 @@
 	if(!. || isnull(loc))
 		return
 
-	if(antigrief_protection && user.faction == GLOB.faction_datum[FACTION_MARINE] && explosive_antigrief_check(src, user))
+	if(antigrief_protection && user.faction == GLOB.faction_datums[FACTION_MARINE] && explosive_antigrief_check(src, user))
 		to_chat(user, SPAN_WARNING("\The [name]'s safe-area accident inhibitor prevents you from priming the grenade!"))
 		// Let staff know, in case someone's actually about to try to grief
 		msg_admin_niche("[key_name(user)] attempted to prime \a [name] in [get_area(src)] [ADMIN_JMP(src.loc)]")

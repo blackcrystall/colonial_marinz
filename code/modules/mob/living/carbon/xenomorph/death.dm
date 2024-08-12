@@ -112,7 +112,7 @@
 			if((last_ares_callout + 2 MINUTES) > world.time)
 				return
 
-		if(faction == GLOB.faction_datum[FACTION_XENOMORPH_NORMAL] && (length(faction.totalMobs) == 1))
+		if(faction == GLOB.faction_datums[FACTION_XENOMORPH_NORMAL] && (length(faction.totalMobs) == 1))
 			var/mob/living/carbon/xenomorph/xeno = LAZYACCESS(faction.totalMobs, 1)
 			last_ares_callout = world.time
 			// Tell the marines where the last one is.

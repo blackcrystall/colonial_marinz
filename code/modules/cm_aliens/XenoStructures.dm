@@ -18,13 +18,13 @@
 
 	set_hive_data(src, faction)
 
-	if(faction == GLOB.faction_datum[FACTION_XENOMORPH_NORMAL])
+	if(faction == GLOB.faction_datums[FACTION_XENOMORPH_NORMAL])
 		RegisterSignal(SSdcs, COMSIG_GLOB_GROUNDSIDE_FORSAKEN_HANDLING, PROC_REF(forsaken_handling))
 
 /obj/effect/alien/proc/forsaken_handling()
 	SIGNAL_HANDLER
 	if(is_ground_level(z))
-		faction = GLOB.faction_datum[FACTION_XENOMORPH_FORSAKEN]
+		faction = GLOB.faction_datums[FACTION_XENOMORPH_FORSAKEN]
 		set_hive_data(src, faction)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_GROUNDSIDE_FORSAKEN_HANDLING)
 

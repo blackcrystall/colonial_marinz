@@ -16,14 +16,14 @@
 	if(!user)
 		var/list/all_equipment = list()
 		for(var/faction_to_get in FACTION_LIST_ALL)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			var/list/equipment = faction.get_antag_guns_sorted_equipment()
 			if(length(equipment))
 				all_equipment += equipment
 		return all_equipment
 
 	var/mob/living/carbon/human/human = user
-	var/datum/faction/faction = human.faction ? human.faction : GLOB.faction_datum[FACTION_CLF]
+	var/datum/faction/faction = human.faction ? human.faction : GLOB.faction_datums[FACTION_CLF]
 	if(!(faction.faction_name in listed_products))
 		listed_products[faction.faction_name] = faction.get_antag_guns_sorted_equipment()
 

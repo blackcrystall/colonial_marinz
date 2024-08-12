@@ -207,7 +207,7 @@
 		message_admins("[key_name_admin(usr)] has used rudimentary transformation on [key_name_admin(mob)]. Transforming to [href_list["simplemake"]]; deletemob=[delmob]")
 
 		var/mob/transformed
-		var/datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+		var/datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 
 		if(isxeno(mob))
 			var/mob/living/carbon/xenomorph/xeno = mob
@@ -786,7 +786,7 @@
 
 		var/list/datum/faction/factions = list()
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 			LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 		choice = tgui_input_list(usr, "Select a hive", "Infect Larva", factions)
@@ -831,7 +831,7 @@
 
 		var/list/datum/faction/factions = list()
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/faction_to_set = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction_to_set = GLOB.faction_datums[faction_to_get]
 			LAZYSET(factions, faction_to_set.name, faction_to_set)
 
 		choice = tgui_input_list(usr, "Which Hive will he belongs to", "Make Cultist", factions)

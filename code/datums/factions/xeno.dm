@@ -19,7 +19,7 @@
 	faction_ui = new(src)
 
 /datum/faction/xenomorph/can_delay_round_end(mob/living/carbon/carbon)
-	if(!faction_is_ally(GLOB.faction_datum[FACTION_MARINE]))
+	if(!faction_is_ally(GLOB.faction_datums[FACTION_MARINE]))
 		return TRUE
 	return FALSE
 

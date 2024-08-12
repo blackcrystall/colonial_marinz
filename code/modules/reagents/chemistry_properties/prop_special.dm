@@ -113,17 +113,17 @@
 	max_level = 6
 
 /datum/chem_property/special/ciphering/process(mob/living/M, potency = 1, delta_time)
-	if(!GLOB.faction_datum[FACTION_LIST_XENOMORPH[level]]) // This should probably always be valid
+	if(!GLOB.faction_datums[FACTION_LIST_XENOMORPH[level]]) // This should probably always be valid
 		return
 
 	for(var/content in M.contents)
 		if(!istype(content, /obj/item/alien_embryo))
 			continue
 		// level is a number rather than a faction, which are strings
-		var/datum/faction/faction = GLOB.faction_datum[FACTION_LIST_XENOMORPH[level]]
+		var/datum/faction/faction = GLOB.faction_datums[FACTION_LIST_XENOMORPH[level]]
 		var/obj/item/alien_embryo/A = content
 		A.faction = faction
-		A.faction_to_get = GLOB.faction_datum[faction]
+		A.faction_to_get = GLOB.faction_datums[faction]
 
 /datum/chem_property/special/ciphering/predator
 	name = PROPERTY_CIPHERING_PREDATOR

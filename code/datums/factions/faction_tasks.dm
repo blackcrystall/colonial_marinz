@@ -152,7 +152,7 @@
 	for(var/faction_to_get in sorted_in_range)
 		faction_mobs_number = length(sorted_in_range[faction_to_get])
 		if(potential_number < faction_mobs_number)
-			potential_faction = GLOB.faction_datum[faction_to_get]
+			potential_faction = GLOB.faction_datums[faction_to_get]
 			potential_number = faction_mobs_number
 
 	var/have_task = FALSE
@@ -201,7 +201,7 @@
 		return
 	var/announce_text = "[name] new controlled by [check_faction]"
 	if(home_sector)
-		var/datum/faction/initial_faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/initial_faction = GLOB.faction_datums[faction_to_get]
 		if(initial_faction == faction)
 			faction_announcement("[name] new controlled by [check_faction], home sector occupied, now for us that big problem!", FACTION_TASKS_SECTOR_CONTROL, null, faction)
 			faction_announcement("[name] new controlled by [check_faction], home sector returned back, now your enemy don't can do anything!", FACTION_TASKS_SECTOR_CONTROL, null, initial_faction)
@@ -339,7 +339,7 @@
 
 	var/list/faction_stats = list("dead_enemy_factions" = 0, "total_friendly_factions" = 0)
 	for(var/faction_name in SSticker.mode.factions_pool)
-		var/datum/faction/faction = GLOB.faction_datum[SSticker.mode.factions_pool[faction_name]]
+		var/datum/faction/faction = GLOB.faction_datums[SSticker.mode.factions_pool[faction_name]]
 		if(faction_owner.relations_datum.allies[faction.faction_name])
 			faction_stats["total_friendly_factions"]++
 

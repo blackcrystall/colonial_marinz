@@ -7,7 +7,7 @@
 	if(!istype(wave_data))
 		return
 
-	var/datum/faction/faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+	var/datum/faction/faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 	if(faction.slashing_allowed != XENO_SLASH_ALLOWED)
 		faction.slashing_allowed = XENO_SLASH_ALLOWED //Allows harm intent for aliens
 	var/xenos_to_spawn

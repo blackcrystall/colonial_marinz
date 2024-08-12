@@ -156,7 +156,7 @@
 		faction_announcement("ALERT.\n\nEnergy build up around communication relay at [get_area(src)] halted.", "[MAIN_AI_SYSTEM] Biological Scanner")
 
 		for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-			var/datum/faction/selected_faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/selected_faction = GLOB.faction_datums[faction_to_get]
 			if(!length(selected_faction.totalMobs))
 				continue
 
@@ -172,7 +172,7 @@
 	faction_announcement("ALERT.\n\nIrregular build up of energy around communication relays at [get_area(src)].", "[MAIN_AI_SYSTEM] Biological Scanner")
 
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/selected_faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/selected_faction = GLOB.faction_datums[faction_to_get]
 		if(!length(selected_faction.totalMobs))
 			continue
 

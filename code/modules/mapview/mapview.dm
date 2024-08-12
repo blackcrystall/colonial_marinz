@@ -73,7 +73,7 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 ///////////////////////
 /////FACTION DATUM/////
 ///////////////////////
-/datum/tacmap/faction_datum
+/datum/tacmap/faction_datums
 	var/datum/faction/faction
 	var/list/datum/tacmap/atom_datum/faction_mobs_to_draw = list()
 	var/list/datum/tacmap/atom_datum/mobs_to_draw = list()
@@ -84,11 +84,11 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 	var/list/enemy_draw = list()
 	var/list/passive_scan = list()
 
-/datum/tacmap/faction_datum/New(datum/faction/faction_to_set)
+/datum/tacmap/faction_datums/New(datum/faction/faction_to_set)
 	faction = faction_to_set
 	SSmapview.faction_tcmp[faction.faction_name] = src
 
-/datum/tacmap/faction_datum/proc/overlays_to_draw(zlevel)
+/datum/tacmap/faction_datums/proc/overlays_to_draw(zlevel)
 	if(!enemy_draw[zlevel])
 		enemy_draw[zlevel] = TRUE
 		spawn(12 SECONDS)
@@ -109,7 +109,7 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 			images_to_gen += mob_datum.image_assoc[faction.faction_name]
 	return images_to_gen
 
-/datum/tacmap/faction_datum/proc/passive_scan(zlevel)
+/datum/tacmap/faction_datums/proc/passive_scan(zlevel)
 	for(var/atom/movable/M as anything in SSmapview.minimaps_by_trait["[SSmapping.level_minimap_trait(zlevel)]"].assoc_atom_datums)
 		var/datum/tacmap/atom_datum/tcov = SSmapview.minimaps_by_trait["[SSmapping.level_minimap_trait(zlevel)]"].assoc_atom_datums[M]
 		if(LAZYISIN(mobs_to_draw, tcov))
@@ -123,7 +123,7 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 			spawn(4 SECONDS)
 				mobs_to_draw -= tcov
 
-/datum/tacmap/faction_datum/proc/enemy_draw()
+/datum/tacmap/faction_datums/proc/enemy_draw()
 	for(var/datum/tacmap/atom_datum/tcov as anything in faction_mobs_to_draw)
 		var/list/view_candidates = SSquadtree.players_in_range(tcov.tcmp_effect.get_range_bounds(), tcov.atom_ref.z, QTREE_EXCLUDE_OBSERVER | QTREE_SCAN_MOBS)
 
@@ -150,7 +150,7 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 /datum/ui_minimap
 	var/minimap_name = "Tactical Map"
 
-	var/datum/tacmap/faction_datum/faction_tcmp_ref
+	var/datum/tacmap/faction_datums/faction_tcmp_ref
 	var/datum/tacmap/atom_datum/active_marker
 	var/datum/tacmap/minimap/minimap_ref
 
@@ -172,7 +172,7 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 	var/updated_canvas = FALSE
 	var/last_update_time = 0
 
-/datum/ui_minimap/New(datum/tacmap/faction_datum/_faction_tcmp_ref, datum/tacmap/minimap/_minimap_ref, atom/_owner_ref, _acting_setting, _minimap_name)
+/datum/ui_minimap/New(datum/tacmap/faction_datums/_faction_tcmp_ref, datum/tacmap/minimap/_minimap_ref, atom/_owner_ref, _acting_setting, _minimap_name)
 	faction_tcmp_ref = _faction_tcmp_ref
 	minimap_ref = _minimap_ref
 	owner_ref = _owner_ref
@@ -383,8 +383,8 @@ GLOBAL_LIST_EMPTY(unannounced_maps)
 
 /datum/ui_minimap/proc/get_markers()
 	. = list()
-	for(var/datum/faction/faction in faction_tcmp_ref ? list(faction_tcmp_ref.faction) : GLOB.faction_datum)
-		var/datum/tacmap/faction_datum/faction_tcmp = faction.tcmp_faction_datum
+	for(var/datum/faction/faction in faction_tcmp_ref ? list(faction_tcmp_ref.faction) : GLOB.faction_datums)
+		var/datum/tacmap/faction_datums/faction_tcmp = faction.tcmp_faction_datum
 		for(var/datum/tacmap/atom_datum/M as anything in faction_tcmp.faction_mobs_to_draw)
 			if(M.atom_ref.z in minimap_ref.map_zlevels)
 				.["[M.generated_tag_ally]"] = M

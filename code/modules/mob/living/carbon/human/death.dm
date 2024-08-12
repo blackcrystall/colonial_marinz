@@ -90,7 +90,7 @@
 		if(last_living_human && (last_qm_callout + 2 MINUTES) < world.time)
 			last_qm_callout = world.time
 			// Tell the xenos where the human is.
-			xeno_announcement("Я чувствую последнего носителя в [get_area(last_living_human)].", GLOB.faction_datum[FACTION_XENOMORPH_NORMAL], SPAN_ANNOUNCEMENT_HEADER_BLUE("[QUEEN_MOTHER_ANNOUNCE]"))
+			xeno_announcement("Я чувствую последнего носителя в [get_area(last_living_human)].", GLOB.faction_datums[FACTION_XENOMORPH_NORMAL], SPAN_ANNOUNCEMENT_HEADER_BLUE("[QUEEN_MOTHER_ANNOUNCE]"))
 			// Tell the human he is the last guy.
 			if(last_living_human.client)
 				to_chat(last_living_human, SPAN_ANNOUNCEMENT_HEADER_BLUE("По телу проходят муражки. Вы понимаете, что вы - последний выживший."))

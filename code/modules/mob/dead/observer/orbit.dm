@@ -129,9 +129,9 @@
 					predators += list(serialized)
 				else if(human in GLOB.ert_mobs)
 					ert_members += list(serialized)
-				else if(human.faction == GLOB.faction_datum[FACTION_MARINE])
+				else if(human.faction == GLOB.faction_datums[FACTION_MARINE])
 					marines += list(serialized)
-				else if(human.faction == GLOB.faction_datum[FACTION_COLONIST])
+				else if(human.faction == GLOB.faction_datums[FACTION_COLONIST])
 					survivors += list(serialized)
 				else
 					humans += list(serialized)

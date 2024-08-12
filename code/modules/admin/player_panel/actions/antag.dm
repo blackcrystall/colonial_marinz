@@ -10,7 +10,7 @@
 
 	var/mob/living/carbon/human/H = target
 
-	if(H.faction != GLOB.faction_datum[FACTION_MARINE])
+	if(H.faction != GLOB.faction_datums[FACTION_MARINE])
 		to_chat(user, SPAN_WARNING("This player's faction must equal '[FACTION_MARINE]' to make them a mutineer."))
 		return
 

@@ -2915,7 +2915,7 @@ Defined in conflicts.dm of the #defines folder.
 	set waitfor = FALSE
 	var/obj/item/explosive/grenade/grenade = current_rounds[ammo_position]
 
-	if(grenade.antigrief_protection && user.faction == GLOB.faction_datum[FACTION_MARINE] && explosive_antigrief_check(grenade, user))
+	if(grenade.antigrief_protection && user.faction == GLOB.faction_datums[FACTION_MARINE] && explosive_antigrief_check(grenade, user))
 		to_chat(user, SPAN_WARNING("\The [name]'s safe-area accident inhibitor prevents you from firing!"))
 		msg_admin_niche("[key_name(user)] attempted to prime \a [gun.name] in [get_area(src)] [ADMIN_JMP(src.loc)]")
 		return

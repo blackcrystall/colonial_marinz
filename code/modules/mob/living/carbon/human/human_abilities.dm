@@ -385,7 +385,7 @@ CULT
 	if(!istype(choice))
 		return
 
-	if(choice.faction != GLOB.faction_datum[FACTION_MARINE] || (choice.skills && skillcheck(choice, SKILL_POLICE, 2)) || (choice in converted))
+	if(choice.faction != GLOB.faction_datums[FACTION_MARINE] || (choice.skills && skillcheck(choice, SKILL_POLICE, 2)) || (choice in converted))
 		to_chat(H, SPAN_WARNING("You can't convert [choice]!"))
 		return
 

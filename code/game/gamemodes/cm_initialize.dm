@@ -145,7 +145,7 @@ Additional game mode variables.
 			if(player.client.prefs.get_job_priority(JOB_PREDATOR) > 0) //Are their prefs turned on?
 				if(!player.mind) //They have to have a key if they have a client.
 					player.mind_initialize() //Will work on ghosts too, but won't add them to active minds.
-				GLOB.faction_datum[FACTION_YAUTJA].add_mob(player)
+				GLOB.faction_datums[FACTION_YAUTJA].add_mob(player)
 				players += player.mind
 	return players
 
@@ -265,7 +265,7 @@ Additional game mode variables.
 			var/datum/mind/new_queen = pick(possible_queens)
 			if(new_queen)
 				new_queen.roundstart_picked = TRUE
-				picked_queens += list(GLOB.faction_datum[hive] = new_queen)
+				picked_queens += list(GLOB.faction_datums[hive] = new_queen)
 				LAZYREMOVE(possible_xenomorphs, new_queen)
 
 	for(var/datum/mind/A in possible_xenomorphs)
@@ -273,7 +273,7 @@ Additional game mode variables.
 			LAZYREMOVE(possible_xenomorphs, A)
 
 	for(var/hive in hives)
-		xenomorphs[GLOB.faction_datum[hive]] = list()
+		xenomorphs[GLOB.faction_datums[hive]] = list()
 
 	var/datum/mind/new_xeno
 	var/current_index = 1
@@ -282,7 +282,7 @@ Additional game mode variables.
 		if(current_index > length(hives))
 			current_index = 1
 
-		var/datum/faction/faction = GLOB.faction_datum[hives[current_index]]
+		var/datum/faction/faction = GLOB.faction_datums[hives[current_index]]
 		if(length(possible_xenomorphs)) //We still have candidates
 			new_xeno = pick(possible_xenomorphs)
 			LAZYREMOVE(possible_xenomorphs, new_xeno)
@@ -305,7 +305,7 @@ Additional game mode variables.
 	if(remaining_slots)
 		var/larva_per_hive = round(remaining_slots / length(hives))
 		for(var/hivenumb in hives)
-			var/datum/faction/faction = GLOB.faction_datum[hivenumb]
+			var/datum/faction/faction = GLOB.faction_datums[hivenumb]
 			faction.stored_larva = larva_per_hive
 
 	/*
@@ -345,7 +345,7 @@ Additional game mode variables.
 			available_xenos_non_ssd += cur_xeno
 
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(faction.stored_larva && (faction.faction_location || (world.time < XENO_BURIED_LARVA_TIME_LIMIT + SSticker.round_start_time)))
 			if(SSticker.mode && MODE_HAS_FLAG(MODE_RANDOM_HIVE))
 				available_xenos |= "any buried larva"
@@ -372,7 +372,7 @@ Additional game mode variables.
 			message_alien_candidates(get_alien_candidates(), dequeued = 0, cache_only = TRUE)
 			if(candidate_observer.larva_queue_cached_message)
 				for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-					var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+					var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 					for(var/mob_name in faction.banished_ckeys)
 						if(faction.banished_ckeys[mob_name] == xeno_candidate.ckey)
 							candidate_observer.larva_queue_cached_message += "\n" + SPAN_WARNING("NOTE: You are banished from the [faction] and you may not rejoin unless the Queen re-admits you or dies. Your queue number won't update until there is a hive you aren't banished from.")
@@ -470,7 +470,7 @@ Additional game mode variables.
 /datum/game_mode/proc/attempt_to_join_as_facehugger(mob/xeno_candidate)
 	var/list/available_hives = list()
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(SSticker.mode && MODE_HAS_FLAG(MODE_RANDOM_HIVE))
 			available_hives |= "any hive"
 			LAZYADD(available_hives["any hive"], faction)
@@ -534,7 +534,7 @@ Additional game mode variables.
 	var/list/active_hives = list()
 	var/datum/faction/faction
 	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
-		faction = GLOB.faction_datum[faction_to_get]
+		faction = GLOB.faction_datums[faction_to_get]
 		if(length(faction.totalMobs) <= 0)
 			continue
 		active_hives[faction.name] = faction
@@ -632,8 +632,8 @@ Additional game mode variables.
 	RETURN_TYPE(/turf)
 
 	if(!faction)
-		faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
-	faction = GLOB.faction_datum[faction]
+		faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
+	faction = GLOB.faction_datums[faction]
 
 	var/mob/living/original = ghost_mind.current
 	if(faction.living_xeno_queen || !original || !original.client)
@@ -676,7 +676,7 @@ Additional game mode variables.
 
 /datum/game_mode/proc/transform_queen(datum/mind/ghost_mind, turf/xeno_turf, datum/faction/faction)
 	if(!faction)
-		faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+		faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 	var/mob/living/original = ghost_mind.current
 	if(faction.living_xeno_queen || !original || !original.client)
 		return

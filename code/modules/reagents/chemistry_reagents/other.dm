@@ -989,9 +989,9 @@
 		volume = 0
 		var/obj/item/alien_embryo/embryo = new /obj/item/alien_embryo(H)
 		if(data_properties && data_properties["hive_number"])
-			embryo.faction = GLOB.faction_datum[data_properties["hive_number"]]
+			embryo.faction = GLOB.faction_datums[data_properties["hive_number"]]
 		else
-			embryo.faction = GLOB.faction_datum[FACTION_XENOMORPH_NORMAL]
+			embryo.faction = GLOB.faction_datums[FACTION_XENOMORPH_NORMAL]
 
 		to_chat(H, SPAN_WARNING("Your stomach cramps and you suddenly feel very sick!"))
 

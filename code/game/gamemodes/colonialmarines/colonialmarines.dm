@@ -200,7 +200,7 @@
 
 	if(!round_finished)
 		for(var/faction_to_get in FACTION_LIST_ALL)
-			var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+			var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 			if(!faction.xeno_queen_timer)
 				continue
 
@@ -238,7 +238,7 @@
 
 		if(!evolution_ovipositor_threshold && world.time >= SSticker.round_start_time + round_time_evolution_ovipositor)
 			for(var/faction_to_get in FACTION_LIST_ALL)
-				var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+				var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 				faction.evolution_without_ovipositor = FALSE
 				if(faction.living_xeno_queen && !faction.living_xeno_queen.ovipositor)
 					to_chat(faction.living_xeno_queen, SPAN_XENODANGER("Время сесть на яйцеклад и дать эволюцию детям."))
@@ -373,7 +373,7 @@
 	if(xeno_queen_deaths == num_last_deaths && !round_finished)
 		if(!faction)
 			for(var/faction_to_get in FACTION_LIST_ALL)
-				faction = GLOB.faction_datum[faction_to_get]
+				faction = GLOB.faction_datums[faction_to_get]
 				if(faction.living_xeno_queen && !is_admin_level(faction.living_xeno_queen.loc.z))
 					//Some Queen is alive, we shouldn't end the game yet
 					return
@@ -428,7 +428,7 @@
 /datum/game_mode/colonialmarines/proc/add_current_round_status_to_end_results(special_round_status as text)
 	var/list/counted_mobs = list()
 	for(var/faction_to_get in FACTION_LIST_ALL)
-		var/datum/faction/faction = GLOB.faction_datum[faction_to_get]
+		var/datum/faction/faction = GLOB.faction_datums[faction_to_get]
 		if(!length(faction.totalMobs) && !length(faction.totalDeadMobs))
 			continue
 		var/list/faction_payload = list("alive mobs" = list(), "dead mobs" = list())

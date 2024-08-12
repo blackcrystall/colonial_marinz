@@ -232,7 +232,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Reboot(auth, shutdown = FALSE, reason)
 	if(auth != GLOB.href_token) //Hotfix of byond skill issue, lummox good boi
-		bad_reboot_auth(auth)
 		return
 
 	Master.Shutdown()

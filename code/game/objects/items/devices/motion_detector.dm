@@ -49,7 +49,7 @@
 /obj/item/device/motiondetector/Initialize()
 	. = ..()
 	if(!faction)
-		faction = GLOB.faction_datum[faction_to_get]
+		faction = GLOB.faction_datums[faction_to_get]
 	range_bounds = new //Just creating a rectangle datum
 	update_icon()
 

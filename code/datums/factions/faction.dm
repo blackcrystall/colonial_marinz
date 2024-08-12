@@ -9,7 +9,7 @@
 	var/faction_iff_tag_type
 
 	var/relations_pregen[] = RELATIONS_NEUTRAL
-	var/datum/faction_relations/relations_datum
+	var/datum/faction_module/relations/relations_datum
 
 	var/hud_type = FACTION_HUD
 	var/orders = "Остаться в живых"
@@ -21,7 +21,7 @@
 	var/list/faction_leaders = list()
 	var/list/late_join_landmarks = list()
 	var/mob/living/carbon/faction_leader
-	var/datum/tacmap/faction_datum/tcmp_faction_datum
+	var/datum/tacmap/faction_datums/tcmp_faction_datum
 	var/datum/objectives_datum/objectives_controller
 	var/list/objectives = list()
 	var/faction_victory_points = 0
@@ -720,7 +720,7 @@
 				continue
 			if(xeno.hunter_data.hunted && !isqueen(xeno))
 				to_chat(xeno, SPAN_XENOANNOUNCE("The Queen has left without you, seperating you from her hive! You must defend yourself from the headhunter before you can enter hibernation..."))
-				xeno.set_hive_and_update(GLOB.faction_datum[FACTION_XENOMORPH_FORSAKEN])
+				xeno.set_hive_and_update(GLOB.faction_datums[FACTION_XENOMORPH_FORSAKEN])
 			else
 				to_chat(xeno, SPAN_XENOANNOUNCE("The Queen has left without you, you quickly find a hiding place to enter hibernation as you lose touch with the hive mind."))
 				if(xeno.stomach_contents.len)
@@ -741,7 +741,7 @@
 		if(A && A.faction != src)
 			continue
 		for(var/obj/item/alien_embryo/embryo in potential_host)
-			embryo.faction = GLOB.faction_datum[FACTION_XENOMORPH_FORSAKEN]
+			embryo.faction = GLOB.faction_datums[FACTION_XENOMORPH_FORSAKEN]
 		potential_host.update_med_icon()
 	for(var/mob/living/carbon/human/current_human as anything in GLOB.alive_human_list)
 		if(!(isspecieshuman(current_human) || isspeciessynth(current_human)))
