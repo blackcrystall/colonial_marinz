@@ -116,6 +116,8 @@
 	if(_effect_icon)
 		effect_icon = _effect_icon
 
+	projectile_flags |= PROJECTILE_HITSCAN
+
 	pixel_x = rand(-8.0, 8) //Want to move them just a tad.
 	pixel_y = rand(-8.0, 8)
 
