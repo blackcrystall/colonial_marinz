@@ -116,8 +116,6 @@
 	if(_effect_icon)
 		effect_icon = _effect_icon
 
-	projectile_flags |= PROJECTILE_HITSCAN
-
 	pixel_x = rand(-8.0, 8) //Want to move them just a tad.
 	pixel_y = rand(-8.0, 8)
 
@@ -307,6 +305,9 @@ So if we are on the 32th absolute pixel coordinate we are on tile 1, but if we a
 		stack_trace("[src] achieved [projectile_speed] velocity somehow at fire_at. Type: [type]. From: [target]. Shot by: [shooter].")
 		qdel(src)
 		return
+
+	if(projectile_speed > AMMO_SPEED_TIER_5)
+		projectile_flags |= PROJECTILE_HITSCAN
 
 	if(!isnull(range))
 		max_range = range
