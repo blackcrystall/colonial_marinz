@@ -146,7 +146,7 @@
 		SEND_SIGNAL(user, COMSIG_MOB_DESTROY_WINDOW, src)
 
 	playsound(src, "windowshatter", 50, 1)
-	handle_debris(proj.damage, proj.dir)
+	handle_debris(proj.damage * 4, proj.dir)
 	deconstruct(disassembled = FALSE)
 	return TRUE
 

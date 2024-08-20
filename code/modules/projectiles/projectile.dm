@@ -1796,7 +1796,7 @@ So if we are on the 32th absolute pixel coordinate we are on tile 1, but if we a
 	bullet_ping(proj)
 	if(proj.damage)
 		if(proj.ammo.flags_ammo_behavior & AMMO_ROCKET)
-			take_damage(proj.damage * 4, proj.firer) // rockets wreck airlocks
+			take_damage(proj.damage * 4, proj.firer) // rockets wreck airlocksbullet_ping
 			return TRUE
 		else
 			take_damage(proj.damage, proj.firer)

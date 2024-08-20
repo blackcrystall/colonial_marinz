@@ -1,6 +1,6 @@
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
-import { Box, Tabs, Flex, Collapsible, Section } from '../components';
+import { Box, Tabs, Flex, Collapsible, NoticeBox, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Statistic = (props, context) => {
@@ -170,7 +170,11 @@ const GetTab = (props, context) => {
               ) : null}
             </Box>
           </Section>
-          <KillView real_data={round.death_list} />
+          {round.death_list ? (
+            <KillView real_data={round.death_list} />
+          ) : (
+            <NoticeBox danger>No recorded kills!</NoticeBox>
+          )}
         </Box>
       );
     case 'Medals':
@@ -262,7 +266,11 @@ const StatTab = (props, context) => {
           <Box height="12px" />
         </Fragment>
       ) : null}
-      <KillView real_data={faction.death_list} />
+      {faction.death_list.length ? (
+        <KillView real_data={faction.death_list} />
+      ) : (
+        <NoticeBox danger>No recorded deaths!</NoticeBox>
+      )}
       <Box height="12px" />
       <Section title="Additional Statistics">
         {faction.statistics_list.length ? (
@@ -334,26 +342,31 @@ const KillView = (props, context) => {
     <Section>
       <Collapsible title="Death Logs">
         {real_data.map((entry, index) => (
-          <Fragment key={index}>
-            <Box height="6px" />
-            <Box
-              style={{
-                padding: '12px 10px 12px 10px',
-                border: '0.5px solid #4a4a4a',
-              }}
-              title={entry.mob_name + ' (' + entry.time_of_death + ')'}>
-              <Box>Mob: {entry.mob_name}</Box>
-              {entry.job_name ? <Box>Job: {entry.job_name}</Box> : null}
-              <Box>Area: {entry.area_name}</Box>
-              <Box>Cause: {entry.cause_name}</Box>
-              <Box>Time: {entry.time_of_death}</Box>
-              <Box>Lifespan: {entry.total_time_alive}</Box>
-              <Box>Damage taken: {entry.total_damage_taken}</Box>
-              <Box>
-                Coords: {entry.x}, {entry.y}, {entry.z}
-              </Box>
+          <Collapsible
+            key={index}
+            title={entry.mob_name + ' (' + entry.time_of_death + ')'}>
+            <Box>Mob: {entry.mob_name}</Box>
+            {entry.job_name ? (
+              <>
+                <Box height="3px" />
+                <Box>Job: {entry.job_name}</Box>
+              </>
+            ) : null}
+            <Box height="3px" />
+            <Box>Area: {entry.area_name}</Box>
+            <Box height="3px" />
+            <Box>Cause: {entry.cause_name}</Box>
+            <Box height="3px" />
+            <Box>Time: {entry.time_of_death}</Box>
+            <Box height="3px" />
+            <Box>Lifespan: {entry.total_time_alive}</Box>
+            <Box height="3px" />
+            <Box>Damage taken: {entry.total_damage_taken}</Box>
+            <Box height="3px" />
+            <Box>
+              Coords: {entry.x}, {entry.y}, {entry.z}
             </Box>
-          </Fragment>
+          </Collapsible>
         ))}
       </Collapsible>
     </Section>
